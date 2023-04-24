@@ -1,0 +1,15 @@
+.rbc-calendar{
+    min-height: 1000px ;
+    width: 300%;
+    padding: 20px
+}
+.rbc-time-content{
+    align-items: normal;
+}
+.rbc-event{
+    background-color: rgb(173, 10, 10);
+}
+
+.rbc-event-label{
+    font-size: 75%;
+}

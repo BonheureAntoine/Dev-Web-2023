@@ -1,0 +1,37 @@
+
+#App-nav{
+    background-color: rgb(129, 136, 136);
+    display: flex;
+    flex-direction: column;
+    border-right: black 5px solid;
+    min-height: 800px;
+    min-width: 10%;
+    max-width: 10%;
+}
+
+#ul-nav{
+    background-color: rgb(129, 136, 136);
+    min-height: 800px;
+}
+.nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: black 5px solid;
+    height: 5%;
+    width: 100%;
+}
+ul{
+    margin: 0px;
+    padding: 0px;
+}
+a.chevaux, a.acceuil, a.calendrier{
+    color: #000000;
+    text-align: center;
+    text-decoration: none;
+    font-size: 180% ;
+    width: 200px;
+    padding-top: 8%;
+    padding-bottom: 8%;
+    cursor: pointer;
+}

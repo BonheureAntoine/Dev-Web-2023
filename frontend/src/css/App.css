@@ -1,0 +1,13 @@
+body{
+    margin: 0;
+}
+#App{
+    min-width: 1100px;
+    min-height: 800px;
+}
+
+#nav-bar{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
