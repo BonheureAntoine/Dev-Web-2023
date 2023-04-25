@@ -40,7 +40,7 @@ const Abonnement = () => {
                 </div>
                 <div className={"top-right"}>
                     <CreditState lessonCredits={"/"} reservedLessons={"/"}/>
-                    <CreditOp/>
+                    <CreditOp riderId={1}/>
                 </div>
             </div>)
     }
@@ -73,13 +73,36 @@ const CreditState = (props) => {
 }
 
 const CreditOp = (props) => {
+    const riderId = props.riderId;
+
+    const handleSubmit = event => {
+        event.preventDefault();
+
+        const formFields = event.target.elements;
+
+        fetch("http://localhost:3001/api/abonnement/operation", {
+            method: "POST",
+            body: JSON.stringify({
+                riderId: +formFields.riderId.value,
+                comment: formFields.comment.value,
+                operation: +formFields.op.value
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+            // .then((response) => response.json())
+            // .then((json) => console.log(json));
+    }
     return (
         <div>
-            <form id={"operationForm"}>
+            <form id={"operationForm"} onSubmit={handleSubmit} method={"post"}>
+                <input type={"hidden"} name={"riderId"} value={riderId}/>;
                 <label for={"op"}>Operation :</label>
                 <input type={"number"} id={"op"} size={"2"}/><br/>
                 <label for={"comment"}>Commentaire :</label><br/>
                 <input type={"textarea"} id={"comment"}/>
+                <input type={"submit"}/>
             </form>
         </div>
     )
