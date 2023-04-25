@@ -6,7 +6,7 @@ const Abonnement = () => {
     const [isLoaded, setIsLoaded] = useState(false)
 
     const fetchUserData = () => {
-        fetch("http://localhost:3001/api/abonnement/user/2")
+        fetch("http://localhost:3001/api/abonnement/user/1")
             .then(response => {
                 return response.json()
             })
@@ -17,10 +17,11 @@ const Abonnement = () => {
     }
 
     useEffect(()=>{
-        fetchUserData()
+        fetchUserData();
     },[])
 
     if(isLoaded){
+        console.log(user)
         return (
             <div className={"top-container"}>
                 <div className={"top-left"}>
@@ -28,7 +29,7 @@ const Abonnement = () => {
                 </div>
                 <div className={"top-right"}>
                     <CreditState lessonCredits={user.lessonCredits} reservedLessons={user.reservedLessons}/>
-                    <CreditOp/>
+                    <CreditOp riderId={user.userId} changeState={fetchUserData}/>
                 </div>
             </div>
         );
@@ -39,8 +40,7 @@ const Abonnement = () => {
                     <Profile name={"loading"} familyName={"..."} url={"profile.png"}/>
                 </div>
                 <div className={"top-right"}>
-                    <CreditState lessonCredits={"/"} reservedLessons={"/"}/>
-                    <CreditOp riderId={1}/>
+                    <p>unavaible</p>
                 </div>
             </div>)
     }
@@ -74,6 +74,7 @@ const CreditState = (props) => {
 
 const CreditOp = (props) => {
     const riderId = props.riderId;
+    const changeState = props.changeState
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -90,14 +91,17 @@ const CreditOp = (props) => {
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
             }
-        })
+        }).then(() => {
+            changeState();
+        });
             // .then((response) => response.json())
             // .then((json) => console.log(json));
+
     }
     return (
         <div>
             <form id={"operationForm"} onSubmit={handleSubmit} method={"post"}>
-                {/*<input type={"hidden"} name={"riderId"} value={riderId}/>*/}
+                <input type={"hidden"} name={"riderId"} value={riderId}/>
                 <label>Operation :</label>
                 <input type={"number"} id={"op"} size={"2"}/><br/>
                 <label>Commentaire :</label><br/>
