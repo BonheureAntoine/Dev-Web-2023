@@ -6,7 +6,7 @@ const Abonnement = () => {
     const [isLoaded, setIsLoaded] = useState(false)
 
     const fetchUserData = () => {
-        fetch("http://localhost:3000/api/user/2")
+        fetch("http://localhost:3001/api/abonnement/user/2")
             .then(response => {
                 return response.json()
             })
@@ -26,7 +26,7 @@ const Abonnement = () => {
                 <div className={"top-left"}>
                     <Profile name={user.name} familyName={user.familyName} url={user.profilePicture}/>
                 </div>
-                <div class={"top-right"}>
+                <div className={"top-right"}>
                     <CreditState lessonCredits={user.lessonCredits} reservedLessons={user.reservedLessons}/>
                     <CreditOp/>
                 </div>
@@ -97,10 +97,10 @@ const CreditOp = (props) => {
     return (
         <div>
             <form id={"operationForm"} onSubmit={handleSubmit} method={"post"}>
-                <input type={"hidden"} name={"riderId"} value={riderId}/>;
-                <label for={"op"}>Operation :</label>
+                {/*<input type={"hidden"} name={"riderId"} value={riderId}/>*/}
+                <label>Operation :</label>
                 <input type={"number"} id={"op"} size={"2"}/><br/>
-                <label for={"comment"}>Commentaire :</label><br/>
+                <label>Commentaire :</label><br/>
                 <input type={"textarea"} id={"comment"}/>
                 <input type={"submit"}/>
             </form>

@@ -3,7 +3,7 @@ const pool = require('../db');
 exports.user = (req, res, next) => {
     pool.getConnection()
         .then(conn => {
-            conn.query("CALL coatOptions()")
+            conn.query(`CALL getUserInfo(${req.params.id});`)
                 .then(rows => {
                     console.log(rows);
                     res.status(200).json(rows[0]);
@@ -21,7 +21,7 @@ exports.user = (req, res, next) => {
 exports.log = (req, res, next) => {
     pool.getConnection()
         .then(conn => {
-            conn.query("CALL coatOptions()")
+            conn.query(`CALL getLogs(${req.params.id});`)
                 .then(rows => {
                     console.log(rows);
                     res.status(200).json(rows[0]);
