@@ -45,10 +45,10 @@ const Abonnement = () => {
                 <div className={"top-container"}>
                     <Profile name={user.name} familyName={user.familyName} url={user.profilePicture} className={"top-div"}/>
                     <CreditState lessonCredits={user.lessonCredits} reservedLessons={user.reservedLessons} className={"top-div"}/>
-                    <CreditOp riderId={user.userId} changeState={fetchUserData} className={"top-div"}/>
+                    <CreditOp riderId={user.userId} changeState={()=>{fetchUserData();fetchLogsData();}} className={"top-div"}/>
                 </div>
                 <hr/>
-                <Log logs={logs}/>
+                <Log logs={logs} changeState={fetchLogsData}/>
             </div>
         );
     }else{
@@ -137,19 +137,21 @@ const CreditOp = (props) => {
 
 const Log = (props) => {
     const logs = Array.from(props.logs);
+    const refresh = props.changeState;
 
     return(
         <table>
             <thead>
                 <tr>
+                    <th>log Id</th>
                     <th>Timestamp</th>
                     <th>Operation</th>
                     <th>Comentaire</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody className={"small"}>
                 {logs.map((log) => (
-                    <tr><td>{log.opDate}</td><td>{log.operation}</td><td>{log.comment}</td></tr>
+                    <tr><td>{log.logId}</td><td>{log.opDate}</td><td>{log.operation}</td><td>{log.comment}</td></tr>
                     ))}
             </tbody>
         </table>
