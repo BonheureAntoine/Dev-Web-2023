@@ -12,6 +12,7 @@ exports.coat = (req, res, next) => {
                         res.status(400).json({err});
                     }
                 )
+                conn.release()
         })
         .catch(err => {
             res.status(400).json({err});
@@ -30,6 +31,7 @@ exports.breed = (req, res, next) => {
                         res.status(400).json({err});
                     }
                 )
+                conn.release()
         })
         .catch(err => {
             res.status(400).json({err});
@@ -48,6 +50,7 @@ exports.breeder = (req, res, next) => {
                         res.status(400).json({err});
                     }
                 )
+                conn.release()
         })
         .catch(err => {
             res.status(400).json({err});

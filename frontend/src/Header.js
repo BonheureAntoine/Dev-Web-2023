@@ -1,14 +1,15 @@
 import React from "react";
 import logo from './img/logo.png'
 import './css/Header.css'
+import { NavLink} from "react-router-dom";
 
 class Header extends React.Component{
     render(){
         return(
             <div id ='App-header'>
-                <a href='http://localhost:3000/'><img src={logo} alt='logo' className="logo"></img></a>
-                <div className="nameEnterprise" >EquiManagement</div>
-                <div className="connect">Se connecter</div>
+                <NavLink to='/' className="link-logo"><img src={logo} alt='logo' className="logo"></img></NavLink>
+                <NavLink to='/' className="link-title"><div className="nameEnterprise" >EquiManagement</div></NavLink>
+                <NavLink to='/Test' className="link-connection"><div className="connect">Se connecter</div></NavLink>
             </div>
         )
     }

@@ -13,21 +13,21 @@ input[type='number']{
 }
 .top-container{
     width:100%;
-    #border: 1px solid green;
+    /* border: 1px solid green; */
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
 }
 .top-left{
-    #border: 1px solid yellow;
+    /* border: 1px solid yellow; */
     width: fit-content;
 }
 .top-right{
-    #border: 1px solid blue;
+    /* border: 1px solid blue; */
     width: fit-content;
 }
 .bot-container{
-    #border: 1px solid brown;
+    /* border: 1px solid brown; */
 }
 
 
