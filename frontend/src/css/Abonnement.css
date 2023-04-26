@@ -11,17 +11,21 @@
 input[type='number']{
     width: 40px;
 }
+.abonnement{
+    width:100%;
+}
 .top-container{
+    margin:10px;
     width:100%;
     #border: 1px solid green;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
 }
-.top-left{
-    #border: 1px solid yellow;
-    width: fit-content;
+.top-div{
+    width:fit-content;
 }
+
 .top-right{
     #border: 1px solid blue;
     width: fit-content;

@@ -23,14 +23,13 @@ const Abonnement = () => {
     if(isLoaded){
         console.log(user)
         return (
+            <div className={"abonnement"}>
             <div className={"top-container"}>
-                <div className={"top-left"}>
-                    <Profile name={user.name} familyName={user.familyName} url={user.profilePicture}/>
-                </div>
-                <div className={"top-right"}>
-                    <CreditState lessonCredits={user.lessonCredits} reservedLessons={user.reservedLessons}/>
-                    <CreditOp riderId={user.userId} changeState={fetchUserData}/>
-                </div>
+                <Profile name={user.name} familyName={user.familyName} url={user.profilePicture} className={"top-div"}/>
+                <CreditState lessonCredits={user.lessonCredits} reservedLessons={user.reservedLessons} className={"top-div"}/>
+                <CreditOp riderId={user.userId} changeState={fetchUserData} className={"top-div"}/>
+            </div>
+            <hr/>
             </div>
         );
     }else{
@@ -94,9 +93,10 @@ const CreditOp = (props) => {
         }).then(() => {
             changeState();
         });
+        formFields.operation.value = 0;
+        formFields.comment.value = "";
             // .then((response) => response.json())
             // .then((json) => console.log(json));
-
     }
     return (
         <div>
@@ -105,7 +105,7 @@ const CreditOp = (props) => {
                 <label>Operation :</label>
                 <input type={"number"} id={"op"} size={"2"}/><br/>
                 <label>Commentaire :</label><br/>
-                <input type={"textarea"} id={"comment"}/>
+                <textarea id={"comment"} cols={"50"} rows={"5"}/><br/>
                 <input type={"submit"}/>
             </form>
         </div>
