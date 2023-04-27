@@ -9,7 +9,7 @@ import '../css/Calendrier.css'
 
 const localizer = momentLocalizer(moment);
 
-function foramtageJsonEvenement(evenementsJson){
+function formatageJsonEvenement(evenementsJson){
   let evenementsArray = [];
   for (let  evenement of evenementsJson){
       let evenementobjet = {};
@@ -62,7 +62,9 @@ class Calendrier extends React.Component{
     }
   }
 
-  fetchEvenements = () => {
+
+
+  componentDidMount() {
     fetch("http://localhost:3000/api/evenements")
         .then(response => {
             if (response.ok) {
@@ -71,33 +73,23 @@ class Calendrier extends React.Component{
             throw new Error("There has been a problem with your fetch operation")
         })
         .then(data => {
-          //console.log(data);
           this.setState({event : data})
         }).catch((error) => {
         console.log('error: ' + error);
     });
   }
 
-  // componentDidMount() {
-  //   fetch("http://localhost:3000/api/evenements")
-  //     .then((respo) => {
-  //       return respo.json();
-  //     })
-  //     .then((json) => {
-  //       this.setState({
-  //         items: json,
-  //     });
-  //     });
-  // }
-
     render(){
-      this.fetchEvenements()
+      // const { fetchEvenements, event } = this.state;
+      //   if (!fetchEvenements) return <div>
+      //       <h1> Pleses wait some time.... </h1> </div> ;
+        
         return <div>
         <Calendar
           localizer={localizer}
           defaultDate={this.state.date}
           defaultView="week"
-          events={foramtageJsonEvenement(this.state.event)}
+          events={formatageJsonEvenement(this.state.event)}
           //events={this.state.event}
           startAccessor="start"
           endAccessor="end"
