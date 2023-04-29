@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link } from 'react-router-dom';
 
 import Home from './components/Home';
 import Chevaux from './components/Chevaux';
@@ -11,7 +11,6 @@ import './css/Nav.css'
 class Nav extends React.Component{
     render(){
         return(
-        <BrowserRouter>
             <div id ='nav-bar'>
                 <nav id='App-nav'>
                 <ul id="ul-nav">
@@ -28,7 +27,6 @@ class Nav extends React.Component{
                     <Route path="/abonnement" element={<Abonnement />} />
                 </Routes>
             </div>
-        </BrowserRouter>
         )
     }
 }
