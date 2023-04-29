@@ -1,0 +1,58 @@
+Table cavaliers {
+  id int
+  isProprietaire varchar
+  nom varchar
+  prenom varchar
+  niveau varchar
+  numTel int
+  creditsCour int
+  tamponCours int
+}
+
+Table abonnements {
+  id int
+  idCavalier int [ref: > cavaliers.id]
+  date date
+  commentaire varchar
+  operation int
+}
+
+Table chevaux {
+  id int
+  race varchar [ref: > races.id]
+  robe varchar
+  status varchar
+  naissance date
+  taille int
+  sexe varchar
+  photo lien
+  eleveur int [ref: > eleveurs.id]
+  proprietaire int [ref: > cavaliers.id]
+}
+
+Table inscriptions {
+  id int
+  idCours int [ref: > evenements.id]
+  idCavalier int [ref: > cavaliers.id]
+  idCheval int [ref: > chevaux.id]
+  presence bool
+
+}
+
+Table evenements {
+  id int
+  type varchar
+  debut date
+  fin date
+  prof int
+}
+
+Table eleveurs {
+  id int
+  nom varchar
+}
+
+Table races {
+  id int
+  nom varchar
+}

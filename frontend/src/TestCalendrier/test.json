@@ -1,0 +1,10 @@
+[
+    {
+        "startDate": "2023-04-24T13:00:00.000Z",
+        "endDate":"2023-04-24T13:00:00.000Z",
+        "title": "Cours de saut",
+        "level": "Avancé",
+        "Participants": ["Bonheure Anroine","Cockburn Euan","Heslpel Louis Justin", "Wone Alassane"],
+        "teacher":"PAPA"
+    }
+]

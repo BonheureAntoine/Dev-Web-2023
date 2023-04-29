@@ -1,0 +1,23 @@
+
+#App-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: black 5px solid;
+    background-color: rgb(173, 167, 167);
+    min-height: 20%;
+}
+.logo{
+    height: 100px;
+    margin: 5px;
+}
+.nameEnterprise{
+    font-size: 2em;
+    font-weight: bold;
+    margin: 10px;
+}
+.connect{
+    clear: right;
+    text-align: right;
+}

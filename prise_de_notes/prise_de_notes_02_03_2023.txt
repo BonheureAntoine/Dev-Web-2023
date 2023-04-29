@@ -1,0 +1,71 @@
+Afficher les autres apps existantes pour gérer les choses similaires
+préciser leurs avantages inconvénients (prix)
+préciser que fils de.. du coup maintenance “gratuite”
+
+Concrétiser les alternatives existantes 
+Possibilités possibles (moyen d’étendre avec autres modules)
+
+bien mettre en valeur les spécificités du client que vous 
+
+Besoin est un peux succinct
+expliquer quoi fair epour gerer cours, manège
+ce dont il a besoin 
+ajouter nots points
+
+Contraintes pas clair
+“site trop lourd” expliquer pq
+si jamais le site meurt prend cb de temps pour redeployer à partir d’un backup (exemple)
+
+Solutions. 
+Screen/maquettes
+Différents écrans
+
+
+Expliquer “le client prend Xh par semaine pour gérer son manège”
+Le client il fait ça de cette manière là avec notre app et ça l’arrange dans ce sens
+
+Conception de l’UI:
+citer d’autres sites en exemple 
+genre de style 
+logos
+lien vers sites de ref
+
+
+
+Ce site serait objectif long terme serait utilisé pour d’autres clients
+
+Expliquer ce qu’est un professeur et ce qu’il fait/veut faire
+
+
+Directeur à la place de propriétaire du manège
+Expliquer proprio cheval ce qu’il fait, qui il est
+
+Visiteur
+
+
+
+IL FAUT DES “AFIN DE”
+
+Peut être des user stories “master
+
+
+Linker le cahier de charges 
+
+
+Etant donné que je fais ceci alors je fais ceci 
+template pour les critères d’acceptation
+
+
+Police de caractère
+responsive 
+
+Routes d’API utilisées pour l’impact sur la DB
+
+
+Est-ce qu’on doit créer une api pour ça ou on en utilise une déjà existante
+
+
+tech intéressante car très (NodeJs React)
+maria db 
+mysql
+

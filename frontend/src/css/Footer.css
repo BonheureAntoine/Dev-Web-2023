@@ -1,0 +1,9 @@
+#App-footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-top: black 5px solid;
+    background-color: rgb(173, 167, 167);
+    min-height: 100px;
+}
