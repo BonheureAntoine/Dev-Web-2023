@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App.js';
 
-import { Auth0Provider } from "@auth0/auth0-react";
+import {Auth0ProviderWithNavigate} from "./components/auth0/ auth0-provider-with-navigate";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <BrowserRouter>
-    <Auth0Provider domain={"dev-nlsmejlnkpumpmbb.eu.auth0.com"} clientId={"geYji3g7wIIjNHNS6J7QrQSJX5h5gUTJ"}>
-    <React.StrictMode>
-    <App />
-    </React.StrictMode>
-    </Auth0Provider>
+        <Auth0ProviderWithNavigate>
+            <React.StrictMode>
+                <App />
+            </React.StrictMode>
+        </Auth0ProviderWithNavigate>
     </BrowserRouter>
 );

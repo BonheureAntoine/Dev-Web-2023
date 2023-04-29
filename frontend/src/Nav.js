@@ -7,6 +7,7 @@ import Calendrier from './components/Calendrier.js';
 import Abonnement from "./components/Abonnement";
 
 import './css/Nav.css'
+import {AuthenticationGuard} from "./components/auth0/authentication-guard";
 
 class Nav extends React.Component{
     render(){
@@ -24,7 +25,7 @@ class Nav extends React.Component{
                     <Route exact path="/" element={<Home />} />
                     <Route path="/calendrier" element={<Calendrier/>} />
                     <Route path="/chevaux" element={<Chevaux />} />
-                    <Route path="/abonnement" element={<Abonnement />} />
+                    <Route path="/abonnement" element={<AuthenticationGuard component={Abonnement}/>} />
                 </Routes>
             </div>
         )

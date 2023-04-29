@@ -1,17 +1,21 @@
 import React, {useEffect, useState} from 'react';
 import '../css/Abonnement.css';
+import {useAuth0} from "@auth0/auth0-react";
 
 const Abonnement = () => {
-    const [user, setUser] = useState([])
+    const [rider, setRider] = useState([])
     const [isLoaded, setIsLoaded] = useState(false)
+    const { user } = useAuth0();
+
+    console.log({user})
 
     const fetchUserData = () => {
-        fetch("http://localhost:3000/api/user/2")
+        fetch("http://localhost:3001/api/abonnement/user/2")
             .then(response => {
                 return response.json()
             })
             .then(data => {
-                setUser(data[0])
+                setRider(data[0])
                 setIsLoaded(true)
             })
     }
@@ -24,10 +28,10 @@ const Abonnement = () => {
         return (
             <div className={"top-container"}>
                 <div className={"top-left"}>
-                    <Profile name={user.name} familyName={user.familyName} url={user.profilePicture}/>
+                    <Profile name={rider.name} familyName={rider.familyName} url={rider.profilePicture}/>
                 </div>
                 <div class={"top-right"}>
-                    <CreditState lessonCredits={user.lessonCredits} reservedLessons={user.reservedLessons}/>
+                    <CreditState lessonCredits={rider.lessonCredits} reservedLessons={rider.reservedLessons}/>
                     <CreditOp/>
                 </div>
             </div>
