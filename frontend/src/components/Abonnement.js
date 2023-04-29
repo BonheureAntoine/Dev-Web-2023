@@ -5,9 +5,6 @@ import {useAuth0} from "@auth0/auth0-react";
 const Abonnement = () => {
     const [rider, setRider] = useState([])
     const [isLoaded, setIsLoaded] = useState(false)
-    const { user } = useAuth0();
-
-    console.log({user})
 
     const fetchUserData = () => {
         fetch("http://localhost:3001/api/abonnement/user/2")

@@ -8,28 +8,56 @@ import Abonnement from "./components/Abonnement";
 
 import './css/Nav.css'
 import {AuthenticationGuard} from "./components/auth0/authentication-guard";
+import {useAuth0} from "@auth0/auth0-react";
 
-class Nav extends React.Component{
-    render(){
-        return(
-            <div id ='nav-bar'>
-                <nav id='App-nav'>
-                <ul id="ul-nav">
-                    <li className="nav"><Link to='/' className="acceuil">Acceuil</Link></li>
-                    <li className="nav"><Link to='/calendrier' className="calendrier">Calendrier</Link></li>
-                    <li className="nav"><Link to='/chevaux' className="chevaux">Chevaux</Link></li>
-                    <li className="nav"><Link to='/abonnement' className="abonnement">Abonnement</Link></li>
-                </ul>
-                </nav>
-                <Routes>
-                    <Route exact path="/" element={<Home />} />
-                    <Route path="/calendrier" element={<Calendrier/>} />
-                    <Route path="/chevaux" element={<Chevaux />} />
-                    <Route path="/abonnement" element={<AuthenticationGuard component={Abonnement}/>} />
-                </Routes>
-            </div>
-        )
-    }
+// class Nav extends React.Component{
+//     render(){
+//         return(
+//             <div id ='nav-bar'>
+//                 <nav id='App-nav'>
+//                 <ul id="ul-nav">
+//                     <li className="nav"><Link to='/' className="acceuil">Acceuil</Link></li>
+//                     <li className="nav"><Link to='/calendrier' className="calendrier">Calendrier</Link></li>
+//                     <li className="nav"><Link to='/chevaux' className="chevaux">Chevaux</Link></li>
+//                     <li className="nav"><Link to='/abonnement' className="abonnement">Abonnement</Link></li>
+//                 </ul>
+//                 </nav>
+//                 <Routes>
+//                     <Route exact path="/" element={<Home />} />
+//                     <Route path="/calendrier" element={<Calendrier/>} />
+//                     <Route path="/chevaux" element={<Chevaux />} />
+//                     <Route path="/abonnement" element={<AuthenticationGuard component={Abonnement}/>} />
+//                 </Routes>
+//             </div>
+//         )
+//     }
+// }
+
+const Nav = () => {
+    const { user, isAuthenticated } = useAuth0();
+
+    if(isAuthenticated) console.log(user['http://localhost:3000/roles'].includes('equiadmin'))
+
+    return(
+                <div id ='nav-bar'>
+                    <nav id='App-nav'>
+                    <ul id="ul-nav">
+                        <li className="nav"><Link to='/' className="acceuil">Acceuil</Link></li>
+                        <li className="nav"><Link to='/calendrier' className="calendrier">Calendrier</Link></li>
+                        <li className="nav"><Link to='/chevaux' className="chevaux">Chevaux</Link></li>
+                        { isAuthenticated &&
+                        user['http://localhost:3000/roles'].includes('equiadmin') &&
+                        (<li className="nav"><Link to='/abonnement' className="abonnement">Abonnement</Link></li>)}
+                    </ul>
+                    </nav>
+                    <Routes>
+                        <Route exact path="/" element={<Home />} />
+                        <Route path="/calendrier" element={<Calendrier/>} />
+                        <Route path="/chevaux" element={<AuthenticationGuard component={Chevaux}/>} />
+                        <Route path="/abonnement" element={<Abonnement/>}/>} />
+                    </Routes>
+                </div>
+    )
 }
 
 export default Nav;
