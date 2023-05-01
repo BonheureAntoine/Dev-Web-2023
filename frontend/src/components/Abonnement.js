@@ -2,16 +2,16 @@ import React, {useEffect, useState} from 'react';
 import '../css/Abonnement.css';
 
 const Abonnement = () => {
-    const [user, setUser] = useState([])
+    const [rider, setRider] = useState([])
     const [isLoaded, setIsLoaded] = useState(false)
 
     const fetchUserData = () => {
-        fetch("http://localhost:3001/api/abonnement/user/1")
+        fetch("http://localhost:3001/api/abonnement/user/2")
             .then(response => {
                 return response.json()
             })
             .then(data => {
-                setUser(data[0])
+                setRider(data[0])
                 setIsLoaded(true)
             })
     }
