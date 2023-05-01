@@ -1,47 +1,70 @@
 import React, {useEffect, useState} from 'react';
 import '../css/Abonnement.css';
 
-const Abonnement = () => {
-    const [rider, setRider] = useState([])
-    const [isLoaded, setIsLoaded] = useState(false)
+const displayedUser=1;
 
-    const fetchUserData = () => {
-        fetch("http://localhost:3001/api/abonnement/user/2")
+const Abonnement = () => {
+
+    const [rider, setRider] = useState([])
+    const [riderIsLoaded, setRiderIsLoaded] = useState(false)
+
+    const [logs, setLogs] = useState([])
+    const [logsIsLoaded, setLogsIsLoaded] = useState(false)
+
+    const fetchRiderData = () => {
+        fetch(`http://localhost:3001/api/abonnement/user/${displayedUser}`)
             .then(response => {
                 return response.json()
             })
             .then(data => {
                 setRider(data[0])
-                setIsLoaded(true)
+                setRiderIsLoaded(true)
+            })
+    }
+
+    const fetchLogsData = () => {
+        fetch(`http://localhost:3001/api/abonnement/logs/${displayedUser}`)
+            .then(response => {
+                return response.json()
+            })
+            .then(data => {
+                console.log(data)
+                setLogs(data)
+                setLogsIsLoaded(true)
             })
     }
 
     useEffect(()=>{
-        fetchUserData();
+        fetchRiderData();
+        fetchLogsData();
     },[])
 
-    if(isLoaded){
-        console.log(user)
+    if(riderIsLoaded && logsIsLoaded){
         return (
             <div className={"abonnement"}>
-            <div className={"top-container"}>
-                <Profile name={user.name} familyName={user.familyName} url={user.profilePicture} className={"top-div"}/>
-                <CreditState lessonCredits={user.lessonCredits} reservedLessons={user.reservedLessons} className={"top-div"}/>
-                <CreditOp riderId={user.userId} changeState={fetchUserData} className={"top-div"}/>
-            </div>
-            <hr/>
+                <div className={"top-container"}>
+                    <Profile name={rider.name} familyName={rider.familyName} url={rider.profilePicture} className={"top-div"}/>
+                    <CreditState lessonCredits={rider.lessonCredits} reservedLessons={rider.reservedLessons} className={"top-div"}/>
+                    <CreditOp riderId={rider.userId} changeState={()=>{fetchRiderData();fetchLogsData();}} className={"top-div"}/>
+                </div>
+                <hr/>
+                <Log logs={logs} changeState={fetchLogsData}/>
             </div>
         );
     }else{
         return(
-            <div className={"top-container"}>
-                <div className={"top-left"}>
-                    <Profile name={"loading"} familyName={"..."} url={"profile.png"}/>
+            <div className={"abonnement"}>
+                <div className={"top-container"}>
+                    <div className={"top-left"}>
+                        <Profile name={"loading"} familyName={"..."} url={"profile.png"}/>
+                    </div>
+                    <div className={"top-right"}>
+                        <p>unavaible</p>
+                    </div>
                 </div>
-                <div className={"top-right"}>
-                    <p>unavaible</p>
-                </div>
-            </div>)
+                <hr/>
+            </div>
+        )
     }
 }
 
@@ -96,7 +119,7 @@ const CreditOp = (props) => {
         formFields.operation.value = 0;
         formFields.comment.value = "";
             // .then((response) => response.json())
-            // .then((json) => console.log(json));
+            {/*// .then((json) => console.log(json));*/}
     }
     return (
         <div>
@@ -109,6 +132,29 @@ const CreditOp = (props) => {
                 <input type={"submit"}/>
             </form>
         </div>
+    )
+}
+
+const Log = (props) => {
+    const logs = Array.from(props.logs);
+    const refresh = props.changeState;
+
+    return(
+        <table>
+            <thead>
+                <tr>
+                    <th>log Id</th>
+                    <th>Timestamp</th>
+                    <th>Operation</th>
+                    <th>Comentaire</th>
+                </tr>
+            </thead>
+            <tbody className={"small"}>
+                {logs.map((log) => (
+                    <tr><td>{log.logId}</td><td>{log.opDate}</td><td>{log.operation}</td><td>{log.comment}</td></tr>
+                    ))}
+            </tbody>
+        </table>
     )
 }
 
