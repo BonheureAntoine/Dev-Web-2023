@@ -4,20 +4,21 @@ import '../css/Abonnement.css';
 const displayedUser=1;
 
 const Abonnement = () => {
-    const [user, setUser] = useState([])
-    const [userIsLoaded, setUserIsLoaded] = useState(false)
+
+    const [rider, setRider] = useState([])
+    const [riderIsLoaded, setRiderIsLoaded] = useState(false)
 
     const [logs, setLogs] = useState([])
     const [logsIsLoaded, setLogsIsLoaded] = useState(false)
 
-    const fetchUserData = () => {
+    const fetchRiderData = () => {
         fetch(`http://localhost:3001/api/abonnement/user/${displayedUser}`)
             .then(response => {
                 return response.json()
             })
             .then(data => {
-                setUser(data[0])
-                setUserIsLoaded(true)
+                setRider(data[0])
+                setRiderIsLoaded(true)
             })
     }
 
@@ -34,18 +35,17 @@ const Abonnement = () => {
     }
 
     useEffect(()=>{
-        fetchUserData();
+        fetchRiderData();
         fetchLogsData();
     },[])
 
-    if(userIsLoaded && logsIsLoaded){
-        {/*console.log(user)*/}
+    if(riderIsLoaded && logsIsLoaded){
         return (
             <div className={"abonnement"}>
                 <div className={"top-container"}>
-                    <Profile name={user.name} familyName={user.familyName} url={user.profilePicture} className={"top-div"}/>
-                    <CreditState lessonCredits={user.lessonCredits} reservedLessons={user.reservedLessons} className={"top-div"}/>
-                    <CreditOp riderId={user.userId} changeState={()=>{fetchUserData();fetchLogsData();}} className={"top-div"}/>
+                    <Profile name={rider.name} familyName={rider.familyName} url={rider.profilePicture} className={"top-div"}/>
+                    <CreditState lessonCredits={rider.lessonCredits} reservedLessons={rider.reservedLessons} className={"top-div"}/>
+                    <CreditOp riderId={rider.userId} changeState={()=>{fetchRiderData();fetchLogsData();}} className={"top-div"}/>
                 </div>
                 <hr/>
                 <Log logs={logs} changeState={fetchLogsData}/>
