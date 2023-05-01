@@ -17,19 +17,19 @@ const Abonnement = () => {
     }
 
     useEffect(()=>{
-        fetchUserData()
+        fetchUserData();
     },[])
 
     if(isLoaded){
+        console.log(user)
         return (
+            <div className={"abonnement"}>
             <div className={"top-container"}>
-                <div className={"top-left"}>
-                    <Profile name={rider.name} familyName={rider.familyName} url={rider.profilePicture}/>
-                </div>
-                <div class={"top-right"}>
-                    <CreditState lessonCredits={rider.lessonCredits} reservedLessons={rider.reservedLessons}/>
-                    <CreditOp/>
-                </div>
+                <Profile name={user.name} familyName={user.familyName} url={user.profilePicture} className={"top-div"}/>
+                <CreditState lessonCredits={user.lessonCredits} reservedLessons={user.reservedLessons} className={"top-div"}/>
+                <CreditOp riderId={user.userId} changeState={fetchUserData} className={"top-div"}/>
+            </div>
+            <hr/>
             </div>
         );
     }else{
@@ -39,8 +39,7 @@ const Abonnement = () => {
                     <Profile name={"loading"} familyName={"..."} url={"profile.png"}/>
                 </div>
                 <div className={"top-right"}>
-                    <CreditState lessonCredits={"/"} reservedLessons={"/"}/>
-                    <CreditOp/>
+                    <p>unavaible</p>
                 </div>
             </div>)
     }
@@ -73,13 +72,41 @@ const CreditState = (props) => {
 }
 
 const CreditOp = (props) => {
+    const riderId = props.riderId;
+    const changeState = props.changeState
+
+    const handleSubmit = event => {
+        event.preventDefault();
+
+        const formFields = event.target.elements;
+
+        fetch("http://localhost:3001/api/abonnement/operation", {
+            method: "POST",
+            body: JSON.stringify({
+                riderId: +formFields.riderId.value,
+                comment: formFields.comment.value,
+                operation: +formFields.op.value
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        }).then(() => {
+            changeState();
+        });
+        formFields.operation.value = 0;
+        formFields.comment.value = "";
+            // .then((response) => response.json())
+            // .then((json) => console.log(json));
+    }
     return (
         <div>
-            <form id={"operationForm"}>
-                <label for={"op"}>Operation :</label>
+            <form id={"operationForm"} onSubmit={handleSubmit} method={"post"}>
+                <input type={"hidden"} name={"riderId"} value={riderId}/>
+                <label>Operation :</label>
                 <input type={"number"} id={"op"} size={"2"}/><br/>
-                <label for={"comment"}>Commentaire :</label><br/>
-                <input type={"textarea"} id={"comment"}/>
+                <label>Commentaire :</label><br/>
+                <textarea id={"comment"} cols={"50"} rows={"5"}/><br/>
+                <input type={"submit"}/>
             </form>
         </div>
     )
