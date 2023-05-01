@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import '../css/Abonnement.css';
-import {useAuth0} from "@auth0/auth0-react";
 
 const Abonnement = () => {
     const [rider, setRider] = useState([])
