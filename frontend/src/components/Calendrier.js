@@ -1,6 +1,7 @@
 import React from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
+import "moment/locale/fr"
 
 
 import "react-big-calendar/lib/css/react-big-calendar.css";
@@ -96,6 +97,20 @@ class Calendrier extends React.Component{
           eventPropGetter={this.eventPropGetter}
           min={new Date().setHours(8,0,0)}
           max={new Date().setHours(22,0,0)}
+          culture="fr"
+          messages = {{
+              allDay: "Tous les jours",
+              previous: "Précédent",
+              next: "Suivant",
+              today: "Aujourd'hui",
+              month: "Mois",
+              week: "Semaine",
+              day: "Jour",
+              agenda: "Agenda",
+              date: "Date",
+              time: "Heure",
+              event: "Evenement",
+          }}
         />
         <div>
 
