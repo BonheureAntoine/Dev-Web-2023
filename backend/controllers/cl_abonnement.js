@@ -3,7 +3,7 @@ const pool = require('../db');
 exports.user = (req, res, next) => {
     pool.getConnection()
         .then(conn => {
-            conn.query("CALL coatOptions()")
+            conn.query(`CALL getUserInfo(${req.params.id});`)
                 .then(rows => {
                     console.log(rows);
                     res.status(200).json(rows[0]);
@@ -12,7 +12,7 @@ exports.user = (req, res, next) => {
                         res.status(400).json({err});
                     }
                 )
-            conn.release()
+            conn.release();
         })
         .catch(err => {
             res.status(400).json({err});
@@ -23,7 +23,7 @@ exports.user = (req, res, next) => {
 exports.log = (req, res, next) => {
     pool.getConnection()
         .then(conn => {
-            conn.query("CALL coatOptions()")
+            conn.query(`CALL getLogs(${req.params.id});`)
                 .then(rows => {
                     console.log(rows);
                     res.status(200).json(rows[0]);
@@ -32,7 +32,7 @@ exports.log = (req, res, next) => {
                         res.status(400).json({err});
                     }
                 )
-            conn.release()
+            conn.release();
         })
         .catch(err => {
             res.status(400).json({err});
@@ -42,16 +42,17 @@ exports.log = (req, res, next) => {
 exports.operation = (req, res, next) => {
     pool.getConnection()
         .then(conn => {
-            conn.query(`CALL operation(${req.body.id});`)
+            console.log(req.body);
+            conn.query(`CALL creditOperation(${req.body.riderId}, ${req.body.operation}, "${req.body.comment}");`)
                 .then(rows => {
-                    console.log(rows);
-                    res.status(200).json(rows[0]);
+                    res.status(200).json();
                 })
                 .catch(err => {
+                        console.log(err);
                         res.status(400).json({err});
                     }
                 )
-            conn.release()
+            conn.release();
         })
         .catch(err => {
             res.status(400).json({err});
