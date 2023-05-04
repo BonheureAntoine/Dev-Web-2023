@@ -19,7 +19,7 @@ const AddHorse = () => {
         comment: "",
     });
     const fetchOptions = () => {
-        fetch("http://localhost:3000/api/horse/options")
+        fetch("http://localhost:3001/api/horse/options")
             .then(response => {
                 if (response.ok) {
                     return response.json()
@@ -57,7 +57,7 @@ const AddHorse = () => {
         formData.height = Number(formFields.height.value)
         formData.statut = formFields.statut.value
         formData.comment = formFields.comment.value
-        fetch("http://localhost:3000/api/horse/addHorse", {
+        fetch("http://localhost:3001/api/horse/addHorse", {
             method: 'POST',
             body: JSON.stringify(formData),
             headers: {

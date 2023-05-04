@@ -20,7 +20,7 @@ exports.user = (req, res, next) => {
 
 }
 
-exports.log = (req, res, next) => {
+exports.logs = (req, res, next) => {
     pool.getConnection()
         .then(conn => {
             conn.query(`CALL getLogs(${req.params.id});`)
