@@ -11,3 +11,28 @@ body{
     flex-direction: row;
     height: 100%;
 }
+#ul-nav{
+    background-color: rgb(129, 136, 136);
+    min-height: 100%;
+    border-right: #000000 solid 5px;
+    margin: 0px;
+    padding: 0px;
+}
+.nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: black 5px solid;
+    height: 5%;
+    width: 100%;
+}
+a.chevaux, a.acceuil, a.calendrier, a.abonnement{
+    color: #000000;
+    text-align: center;
+    text-decoration: none;
+    font-size: 180% ;
+    width: 200px;
+    padding-top: 8%;
+    padding-bottom: 8%;
+    cursor: pointer;
+}

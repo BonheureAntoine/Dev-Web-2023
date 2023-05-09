@@ -1,8 +1,9 @@
-import React from 'react';
-import Headers from './Header.js';
-import Nav from './Nav.js';
-import Footer from './Footer.js';
+import React from "react";
+
+import Header from "./Header";
+import Footer from "./Footer";
 import './css/App.css'
+import Nav from "./Nav";
 
 //import ReactDOM from 'react-dom/client';
 
@@ -10,7 +11,7 @@ class App extends React.Component{
     render(){
         return (
             <div id='App'>
-                <Headers/>
+                <Header/>
                 <Nav/>
                 <Footer/>
             </div>

@@ -9,12 +9,12 @@ const Header = () => {
     const { isAuthenticated } = useAuth0();
 
     return(
-            <div id ='App-header'>
-                <a href='http://localhost:3000/'><img src={logo} alt='logo' className="logo"></img></a>
-                <div className="nameEnterprise" >EquiManagement</div>
-                {!isAuthenticated && (<LoginButton/>)}
-                {isAuthenticated && (<LogoutButton/>)}
-            </div>
+        <div id ='App-header'>
+            <a href='http://localhost:3000/'><img src={logo} alt='logo' className="logo"></img></a>
+            <div className="nameEnterprise" >EquiManagement</div>
+            {!isAuthenticated && (<LoginButton/>)}
+            {isAuthenticated && (<LogoutButton/>)}
+        </div>
         )
 }
 

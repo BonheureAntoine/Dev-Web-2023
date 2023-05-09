@@ -54,6 +54,7 @@ const Abonnement = () => {
         fetchLogsData();
     }, [ getAccessTokenSilently])
 
+
     if(riderIsLoaded && logsIsLoaded){
         return (
             <div className={"abonnement"}>
