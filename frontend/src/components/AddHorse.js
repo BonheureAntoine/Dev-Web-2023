@@ -90,7 +90,7 @@ const AddHorse = () => {
 
     if (isLoaded) {
         return (
-            <form onSubmit={handleSubmit}>
+            <form className={'addHorse'} onSubmit={handleSubmit}>
                 <FormTop/>
                 <div className={"right"}>
                     <div className={"field"}>
@@ -124,7 +124,7 @@ const AddHorse = () => {
         );
     } else {
         return (
-            <form onSubmit={handleSubmit}>
+            <form className={'addHorse'} onSubmit={handleSubmit}>
                 <FormTop/>
                 <div className={"right"}>
                     <div className={"field"}>

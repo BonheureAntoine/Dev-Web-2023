@@ -1,11 +1,14 @@
 form{
     margin: 2%;
-    width: 100%;
-    height: 100%;
     padding: 1.5em;
     border: 1px solid #CCC;
     border-radius: 2em;
     background-color: #f2f2f2;
+}
+
+.addHorse{
+    width: 100%;
+    height: 100%;
 }
 
 .field{
