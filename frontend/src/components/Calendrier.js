@@ -64,7 +64,7 @@ class Calendrier extends React.Component{
   }
   
   componentDidMount() {
-    fetch("http://localhost:3000/api/evenements")
+    fetch("http://localhost:3001/api/evenements")
         .then(response => {
             if (response.ok) {
                 return response.json();
