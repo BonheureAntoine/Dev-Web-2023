@@ -64,7 +64,7 @@ class Calendrier extends React.Component{
   }
   
   componentDidMount() {
-    fetch("http://localhost:3001/api/evenements")
+    fetch("https://dev-web-2023-fy94-backend-md0isnjgn-jhespellouis.vercel.app/api/evenements")
         .then(response => {
             if (response.ok) {
                 return response.json();
