@@ -1,48 +1,71 @@
 import React, {useEffect, useState} from 'react';
 import '../css/Abonnement.css';
 
-const Abonnement = () => {
-    const [user, setUser] = useState([])
-    const [isLoaded, setIsLoaded] = useState(false)
+const displayedUser=1;
 
-    const fetchUserData = () => {
-        fetch("http://localhost:3000/api/user/2")
+const Abonnement = () => {
+
+    const [rider, setRider] = useState([])
+    const [riderIsLoaded, setRiderIsLoaded] = useState(false)
+
+    const [logs, setLogs] = useState([])
+    const [logsIsLoaded, setLogsIsLoaded] = useState(false)
+
+    const fetchRiderData = () => {
+        fetch(`http://localhost:3001/api/abonnement/user/${displayedUser}`)
             .then(response => {
                 return response.json()
             })
             .then(data => {
-                setUser(data[0])
-                setIsLoaded(true)
+                setRider(data[0])
+                setRiderIsLoaded(true)
+            })
+    }
+
+    const fetchLogsData = () => {
+        fetch(`http://localhost:3001/api/abonnement/logs/${displayedUser}`)
+            .then(response => {
+                return response.json()
+            })
+            .then(data => {
+                console.log(data)
+                setLogs(data)
+                setLogsIsLoaded(true)
             })
     }
 
     useEffect(()=>{
-        fetchUserData()
+        fetchRiderData();
+        fetchLogsData();
     },[])
 
-    if(isLoaded){
+
+    if(riderIsLoaded && logsIsLoaded){
         return (
-            <div className={"top-container"}>
-                <div className={"top-left"}>
-                    <Profile name={user.name} familyName={user.familyName} url={user.profilePicture}/>
+            <div className={"abonnement"}>
+                <div className={"top-container"}>
+                    <Profile name={rider.name} familyName={rider.familyName} url={rider.profilePicture} className={"top-div"}/>
+                    <CreditState lessonCredits={rider.lessonCredits} reservedLessons={rider.reservedLessons} className={"top-div"}/>
+                    <CreditOp riderId={rider.userId} changeState={()=>{fetchRiderData();fetchLogsData();}} className={"top-div"}/>
                 </div>
-                <div class={"top-right"}>
-                    <CreditState lessonCredits={user.lessonCredits} reservedLessons={user.reservedLessons}/>
-                    <CreditOp/>
-                </div>
+                <hr/>
+                <Log logs={logs} changeState={fetchLogsData}/>
             </div>
         );
     }else{
         return(
-            <div className={"top-container"}>
-                <div className={"top-left"}>
-                    <Profile name={"loading"} familyName={"..."} url={"profile.png"}/>
+            <div className={"abonnement"}>
+                <div className={"top-container"}>
+                    <div className={"top-left"}>
+                        <Profile name={"loading"} familyName={"..."} url={"profile.png"}/>
+                    </div>
+                    <div className={"top-right"}>
+                        <p>unavaible</p>
+                    </div>
                 </div>
-                <div className={"top-right"}>
-                    <CreditState lessonCredits={"/"} reservedLessons={"/"}/>
-                    <CreditOp/>
-                </div>
-            </div>)
+                <hr/>
+            </div>
+        )
     }
 }
 
@@ -73,15 +96,66 @@ const CreditState = (props) => {
 }
 
 const CreditOp = (props) => {
+    const riderId = props.riderId;
+    const changeState = props.changeState
+
+    const handleSubmit = event => {
+        event.preventDefault();
+
+        const formFields = event.target.elements;
+
+        fetch("http://localhost:3001/api/abonnement/operation", {
+            method: "POST",
+            body: JSON.stringify({
+                riderId: +formFields.riderId.value,
+                comment: formFields.comment.value,
+                operation: +formFields.op.value
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        }).then(() => {
+            changeState();
+        });
+        formFields.operation.value = 0;
+        formFields.comment.value = "";
+            // .then((response) => response.json())
+            {/*// .then((json) => console.log(json));*/}
+    }
     return (
         <div>
-            <form id={"operationForm"}>
-                <label for={"op"}>Operation :</label>
+            <form id={"operationForm"} onSubmit={handleSubmit} method={"post"}>
+                <input type={"hidden"} name={"riderId"} value={riderId}/>
+                <label>Operation :</label>
                 <input type={"number"} id={"op"} size={"2"}/><br/>
-                <label for={"comment"}>Commentaire :</label><br/>
-                <input type={"textarea"} id={"comment"}/>
+                <label>Commentaire :</label><br/>
+                <textarea id={"comment"} cols={"50"} rows={"5"}/><br/>
+                <input type={"submit"}/>
             </form>
         </div>
+    )
+}
+
+const Log = (props) => {
+    const logs = Array.from(props.logs);
+    const refresh = props.changeState;
+
+    return(
+        <table>
+            <thead>
+                <tr>
+                    <th>log Id</th>
+                    <th>Timestamp</th>
+                    <th>Operation</th>
+                    <th>Comentaire</th>
+                </tr>
+            </thead>
+            <tbody className={"small"}>
+                {logs.map((log) => (
+                    <tr><td>{log.logId}</td><td>{log.opDate}</td><td>{log.operation}</td><td>{log.comment}</td></tr>
+                    ))}
+            </tbody>
+        </table>
     )
 }
 

@@ -11,27 +11,35 @@
 input[type='number']{
     width: 40px;
 }
-.top-container{
+hr{
     width:100%;
-    /* border: 1px solid green; */
+}
+.abonnement{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.top-container{
+    margin:10px;
+    width:100%;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
 }
-.top-left{
-    /* border: 1px solid yellow; */
-    width: fit-content;
-}
-.top-right{
-    /* border: 1px solid blue; */
-    width: fit-content;
-}
-.bot-container{
-    /* border: 1px solid brown; */
+
+.top-div{
+    width:fit-content;
 }
 
+.top-right {
+    width: fit-content;
+}
 
-.full{
-    width:100%;
-    height: 100%;
+.small{
+    height: 10ch;
+    overflow-y: scroll;
+}
+table{
+    width:70%;
 }

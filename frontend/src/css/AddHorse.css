@@ -1,0 +1,56 @@
+form{
+    margin: 2%;
+    width: 100%;
+    height: 100%;
+    padding: 1.5em;
+    border: 1px solid #CCC;
+    border-radius: 2em;
+    background-color: #f2f2f2;
+}
+
+.field{
+    justify-content: space-between;
+    margin: 2%;
+    width: 48%;
+}
+
+.left{
+    height: 400px;
+    width: 48%;
+    float: left;
+}
+
+.right{
+    height: 400px;
+    width: 48%;
+    float: right;
+}
+
+.btn{
+    margin-top: 5%;
+    margin-left: 2%;
+    width: 250px;
+    border-radius: 2em;
+}
+
+.wrong{
+    background-color: #d91313;
+}
+
+#successdisplay{
+    padding: 1em;
+    border-radius: 3em;
+    display: block;
+    margin: 2%;
+}
+
+.blockbutton{
+    display: block;
+}
+
+#errordisplay{
+    padding: 1em;
+    border-radius: 3em;
+    display: block;
+    margin: 2%;
+}
