@@ -19,7 +19,7 @@ const AddHorse = () => {
         comment: "",
     });
     const fetchOptions = () => {
-        fetch("http://localhost:3001/api/horse/options")
+        fetch("https://dev-web-2023-fy94-backend.vercel.app/api/horse/options")
             .then(response => {
                 if (response.ok) {
                     return response.json()
