@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import '../css/Abonnement.css';
+import {useAuth0} from "@auth0/auth0-react";
 
 const displayedUser=1;
 
 const Abonnement = () => {
+    const { getAccessTokenSilently } = useAuth0();
 
     const [rider, setRider] = useState([])
     const [riderIsLoaded, setRiderIsLoaded] = useState(false)
@@ -11,16 +13,29 @@ const Abonnement = () => {
     const [logs, setLogs] = useState([])
     const [logsIsLoaded, setLogsIsLoaded] = useState(false)
 
-    const fetchRiderData = () => {
-        fetch(`http://localhost:3001/api/abonnement/user/${displayedUser}`)
-            .then(response => {
-                return response.json()
+    const fetchRiderData = () =>{
+            var accessToken;
+            console.log('here')
+            getAccessTokenSilently({
+                authorizationParams: {
+                    audience: 'https://equimanagement/api/abonnement',
+                    scope: 'read:abonnement'
+                }
+            }).then(response=>{accessToken = response});
+
+            fetch(`http://localhost:3001/api/abonnement/user/${displayedUser}`, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                }
             })
-            .then(data => {
-                setRider(data[0])
-                setRiderIsLoaded(true)
-            })
-    }
+                .then(response => {
+                    return response.json()
+                })
+                .then(data => {
+                    setRider(data[0])
+                    setRiderIsLoaded(true)
+                })
+        };
 
     const fetchLogsData = () => {
         fetch(`http://localhost:3001/api/abonnement/logs/${displayedUser}`)
@@ -37,7 +52,7 @@ const Abonnement = () => {
     useEffect(()=>{
         fetchRiderData();
         fetchLogsData();
-    },[])
+    }, [ getAccessTokenSilently])
 
     if(riderIsLoaded && logsIsLoaded){
         return (

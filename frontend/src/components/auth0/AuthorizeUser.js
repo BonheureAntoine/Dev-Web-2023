@@ -8,9 +8,7 @@ const AuthorizeUser = (props) => {
 
     const userRole = props.userRole;
     if(isAuthenticated){
-        console.log(user['http://localhost:3000/roles'] + ' is isAuthenticated');
         if (user['http://localhost:3000/roles'].includes(userRole)){
-            console.log('and has the role')
             return <Component/>;}
     }else{
         return ""
