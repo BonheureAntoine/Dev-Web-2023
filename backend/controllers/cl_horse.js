@@ -91,3 +91,23 @@ exports.addHorse = (req, res) => {
             })
     }
 }
+
+exports.getHorseOptn = (req, res) => {
+    pool.getConnection()
+        .then(conn => {
+            console.log("trying")
+            conn.query("CALL getHorseOptn(?);", [req.params.id.split(":")[1]])
+                .then(rows => {
+                    console.log("Calling  getHorseOptn");
+                    res.status(200).json(rows[0]);
+                })
+                .catch(err => {
+                        res.status(400).json({err});
+                    }
+                )
+            conn.release()
+        })
+        .catch(err => {
+            res.status(400).json({err});
+        })
+}
