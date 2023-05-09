@@ -7,10 +7,12 @@ import Calendrier from './components/Calendrier.js';
 import Abonnement from "./components/Abonnement";
 
 import './css/Nav.css'
+
 import {AuthenticationGuard} from "./components/auth0/authentication-guard";
 import {useAuth0} from "@auth0/auth0-react";
 import {Error403} from "./components/auth0/error403";
 import AuthorizeUser from "./components/auth0/AuthorizeUser";
+import AddHorse from "./components/AddHorse";
 
 // class Nav extends React.Component{
 //     render(){
@@ -45,6 +47,7 @@ const Nav = () => {
                         <li className="nav"><Link to='/' className="acceuil">Acceuil</Link></li>
                         <li className="nav"><Link to='/calendrier' className="calendrier">Calendrier</Link></li>
                         <li className="nav"><Link to='/chevaux' className="chevaux">Chevaux</Link></li>
+                        <li className="nav"><Link to='/addhorse' className="chevaux">Chevaux</Link></li>
                         {/*{ isAuthenticated &&*/}
                         {/*user['http://localhost:3000/roles'].includes('equiadmin') &&*/}
                         {/*(<li className="nav"><Link to='/abonnement' className="abonnement">Abonnement</Link></li>)}*/}
@@ -57,8 +60,10 @@ const Nav = () => {
                         <Route exact path="/" element={<Home />} />
                         <Route path="/calendrier" element={<Calendrier/>} />
                         <Route path="/chevaux" element={<AuthenticationGuard component={Chevaux}/>} />
+                        <Route path="/addhorse" element={<AddHorse />} />
                         <Route path="/abonnement" element={<Abonnement/>}/>
                         <Route path={"/notAuthorized"} element={<Error403/>}/>
+
                     </Routes>
                 </div>
     )

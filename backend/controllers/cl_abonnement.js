@@ -17,6 +17,7 @@ exports.user = (req, res, next) => {
         .catch(err => {
             res.status(400).json({err});
         })
+
 }
 
 exports.logs = (req, res, next) => {

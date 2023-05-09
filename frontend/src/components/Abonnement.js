@@ -39,6 +39,7 @@ const Abonnement = () => {
         fetchLogsData();
     },[])
 
+
     if(riderIsLoaded && logsIsLoaded){
         return (
             <div className={"abonnement"}>
