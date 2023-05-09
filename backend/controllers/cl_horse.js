@@ -12,7 +12,8 @@ exports.options = (req, res) => {
                         res.status(400).json({err});
                     }
                 )
-            conn.release()
+
+                conn.release()
         })
         .catch(err => {
             res.status(400).json({err});
@@ -91,3 +92,4 @@ exports.addHorse = (req, res) => {
             })
     }
 }
+

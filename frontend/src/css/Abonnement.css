@@ -27,6 +27,7 @@ hr{
     flex-direction: row;
     justify-content: space-evenly;
 }
+
 .top-div{
     width:fit-content;
 }

@@ -13,6 +13,7 @@ exports.user = (req, res, next) => {
                     }
                 )
             conn.release();
+
         })
         .catch(err => {
             res.status(400).json({err});
@@ -32,7 +33,7 @@ exports.logs = (req, res, next) => {
                         res.status(400).json({err});
                     }
                 )
-            conn.release();
+                conn.release()
         })
         .catch(err => {
             res.status(400).json({err});
@@ -52,7 +53,7 @@ exports.operation = (req, res, next) => {
                         res.status(400).json({err});
                     }
                 )
-            conn.release();
+                conn.release()
         })
         .catch(err => {
             res.status(400).json({err});
