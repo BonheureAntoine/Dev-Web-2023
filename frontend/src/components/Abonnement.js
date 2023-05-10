@@ -12,7 +12,7 @@ const Abonnement = () => {
     const [logsIsLoaded, setLogsIsLoaded] = useState(false)
 
     const fetchRiderData = () => {
-        fetch(`http://localhost:3001/api/abonnement/user/${displayedUser}`)
+        fetch(`https://equimanagmentapi.vercel.app/api/abonnement/user/${displayedUser}`)
             .then(response => {
                 return response.json()
             })
@@ -23,7 +23,7 @@ const Abonnement = () => {
     }
 
     const fetchLogsData = () => {
-        fetch(`http://localhost:3001/api/abonnement/logs/${displayedUser}`)
+        fetch(`https://equimanagmentapi.vercel.app/api/abonnement/logs/${displayedUser}`)
             .then(response => {
                 return response.json()
             })

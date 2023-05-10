@@ -19,7 +19,7 @@ const AddHorse = () => {
         comment: "",
     });
     const fetchOptions = () => {
-        fetch("https://dev-web-2023-fy94-backend.vercel.app/api/horse/options")
+        fetch("https://equimanagmentapi.vercel.app/api/horse/options")
             .then(response => {
                 if (response.ok) {
                     return response.json()
@@ -57,7 +57,7 @@ const AddHorse = () => {
         formData.height = Number(formFields.height.value)
         formData.statut = formFields.statut.value
         formData.comment = formFields.comment.value
-        fetch("https://dev-web-2023-fy94-backend.vercel.app/api/horse/addHorse", {
+        fetch("https://equimanagmentapi.vercel.app/api/horse/addHorse", {
             method: 'POST',
             body: JSON.stringify(formData),
             headers: {
