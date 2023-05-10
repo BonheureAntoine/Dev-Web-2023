@@ -26,6 +26,8 @@ exports.addHorse = (req, res) => {
         let errormsg = [];
         if (typeof req.body.photo !== "string" && req.body.photo !== null) { //Verif Photo
             errormsg.push("Le format de la photo est invalide")
+        } else if(req.body.photo.length > 500) {
+            errormsg.push("Photo invalide: Le nom du fichier ne peut pas dépasser 500 caractères")
         }
         if (typeof req.body.birthdate !== "string" || isNaN(new Date(req.body.birthdate).getTime())) { //Verif Date
             errormsg.push("Le format de la date est invalide")

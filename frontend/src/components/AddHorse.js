@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import parse from 'html-react-parser'
 import '../css/AddHorse.css'
 
-
 const AddHorse = () => {
     const [fetchData, setfetchData] = useState([])
     const [isLoaded, setIsLoaded] = useState(false)
@@ -83,6 +82,8 @@ const AddHorse = () => {
         document.getElementById("errordisplay").style.backgroundColor = "rgba(220,101,101,0.68)"
     }
     const successDisplay = () => {
+        document.getElementById("errordisplay").innerText = ""
+        document.getElementById("errordisplay").style.backgroundColor = "#f2f2f2"
         document.getElementById("button").style.display = "none"
         document.getElementById("successdisplay").innerText = "Cheval ajouté avec succès à la base de données"
         document.getElementById("successdisplay").style.backgroundColor = "rgba(149, 203, 148, 0.68)"
