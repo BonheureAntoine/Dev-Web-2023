@@ -44,8 +44,8 @@ class HorseList extends Component {
         }
     }
 
-    getHorses = () => {
-        fetch("http://localhost:3000/api/horse/getHorses")
+    componentDidMount() {
+        fetch("http://localhost:3001/api/horse/getHorses")
             .then(response => {
                 if (response.ok) {
                     return response.json();
@@ -61,7 +61,6 @@ class HorseList extends Component {
     }
 
     render() {
-        this.getHorses()
         return (
             <div className="horseList">
                 {this.state.horseList.map((horse, index) => (<Horse

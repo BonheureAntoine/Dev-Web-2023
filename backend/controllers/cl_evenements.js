@@ -5,7 +5,6 @@ exports.evenements = (req, res, next) => {
         .then(conn => {
             conn.query("CALL allEvent()")
                 .then(rows => {
-                    console.log(rows);
                     res.status(200).json(rows[0]);
                 })
                 .catch(err => {
