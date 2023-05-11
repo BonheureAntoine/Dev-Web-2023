@@ -22,7 +22,7 @@ exports.getUserPayments = (req, res, next) => {
                      */
                     }
                 )
-
+                conn.release()
         })
         .catch(err => {
             res.status(400).json({err});
@@ -44,6 +44,7 @@ exports.createUserPayment = (req, res, next) => {
                         res.status(400).json({err});
                     }
                 )
+                conn.release()
         })
         .catch(err => {
             res.status(400).json({err});
@@ -63,6 +64,7 @@ exports.updateUserPayment = (req, res, next) => {
                         res.status(400).json({err});
                     }
                 )
+                conn.release()
         })
         .catch(err => {
             res.status(400).json({err});
@@ -83,6 +85,7 @@ exports.deleteUserPayment = (req, res, next) => {
                         res.status(400).json({err});
                     }
                 )
+                conn.release()
         })
         .catch(err => {
             res.status(400).json({err});

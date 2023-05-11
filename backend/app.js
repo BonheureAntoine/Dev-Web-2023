@@ -2,6 +2,8 @@ const express = require('express');
 const mariadb = require('mariadb');
 const horseRoutes = require('./routes/r_horse');
 const paymentsRoutes = require('./routes/r_payment');
+const abonnementRoutes = require('./routes/r_abonnement');
+const evenements = require('./routes/r_evenements')
 const pool = require('./db');
 require('dotenv').config({path :'.env-local'});
 
@@ -29,5 +31,9 @@ app.use("/api/horse", horseRoutes);
  * et derrière au controller /controllers/cl_horse.js
  */
 
+// app.use(express.urlencoded({extended:true}));
+app.use('/api/abonnement', abonnementRoutes);
+
+app.use('/api/evenements', evenements)
 module.exports = app;
 

@@ -4,9 +4,9 @@ const router = express.Router();
 const userCtrl = require('../controllers/cl_horse');
 const pool = require("../db");
 
-router.get('/coat', userCtrl.coat);
-router.get('/breed', userCtrl.breed);
-router.get('/breeder', userCtrl.breeder);
 router.get('/getHorses', userCtrl.getHorses);
+router.get('/options', userCtrl.options);
+router.post('/addHorse', userCtrl.addHorse);
+
 
 module.exports = router;

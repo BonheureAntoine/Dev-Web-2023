@@ -2,33 +2,23 @@ import React, {useEffect, useState} from 'react';
 import parse from 'html-react-parser'
 import '../css/AddHorse.css'
 
-
 const AddHorse = () => {
-    const [isLoaded, setIsLoaded] = useState({
-        breed: false,
-        breeder: false,
-        coat: false,
-    })
-    const [fetchData, setFetchData] = useState({
-        breed: [],
-        breeder: [],
-        coat: [],
-    })
-    const [formData, setFormData] = useState({
-        photo: "",
+    const [fetchData, setfetchData] = useState([])
+    const [isLoaded, setIsLoaded] = useState(false)
+    const [formData] = useState({
+        photo: null,
         hname: "",
-        gender: "Male",
+        gender: "male",
         birthdate: "",
-        breed: false,
-        breeder: false,
-        coat: false,
+        breed: null,
+        breeder: null,
+        coat: null,
         height: "",
         statut: "elev",
         comment: "",
     });
-
-    const fetchBreeds = () => {
-        fetch("http://localhost:3000/api/horse/breed")
+    const fetchOptions = () => {
+        fetch("http://localhost:3001/api/horse/options")
             .then(response => {
                 if (response.ok) {
                     return response.json()
@@ -36,122 +26,72 @@ const AddHorse = () => {
                 throw new Error("There has been a problem with your fetch operation")
             })
             .then(data => {
-                setFetchData(prevState => ({
-                    ...prevState,
-                    breed: data,
-                }));
-                setIsLoaded(prevState => ({
-                    ...prevState,
-                    breed: true,
-                }));
-            }).catch((error) => {
-            console.log('error: ' + error);
-        });
-    }
-
-    const fetchBreeders = () => {
-        fetch("http://localhost:3000/api/horse/breeder")
-            .then(response => {
-                if (response.ok) {
-                    return response.json()
-                }
-                throw new Error("There has been a problem with your fetch operation")
-            })
-            .then(data => {
-                setFetchData(prevState => ({
-                    ...prevState,
-                    breeder: data,
-                }));
-                setIsLoaded(prevState => ({
-                    ...prevState,
-                    breeder: true,
-                }));
-            }).catch((error) => {
-            console.log('error: ' + error);
-        });
-    }
-
-    const fetchCoats = () => {
-        fetch("http://localhost:3000/api/horse/coat")
-            .then(response => {
-                if (response.ok) {
-                    return response.json()
-                }
-                throw new Error("There has been a problem with your fetch operation")
-            })
-            .then(data => {
-                setFetchData(prevState => ({
-                    ...prevState,
-                    coat: data,
-                }));
-                setIsLoaded(prevState => ({
-                    ...prevState,
-                    coat: true,
-                }));
+                setfetchData([data]);
+                setIsLoaded(true)
             }).catch((error) => {
             console.log('error: ' + error);
         });
     }
 
     useEffect(() => {
-        fetchBreeds()
-        fetchBreeders()
-        fetchCoats()
+        fetchOptions()
     }, [])
 
     const handleSubmit = (event) => {
         event.preventDefault()
-
         const formFields = event.target.elements;
-        if(formFields.photo.files[0] !== undefined){
-            formData.photo = formFields.photo.files[0]
-        }else{
-            formData.photo = null
+        if (formFields.photo.files[0] !== undefined) {
+            formData.photo = formFields.photo.files[0].name
         }
         formData.hname = formFields.hname.value
         formData.gender = formFields.gender.value
-        formData.birthdate = new Date(formFields.birthdate.value).toISOString().slice(0, 19).replace('T', ' ')
+        formData.birthdate = formFields.birthdate.value
         formData.breed = Number(formFields.breed.value)
-        if (formFields.breeder.value === null) {
-            formData.breeder = null
-        } else {
+        if (formFields.breeder.value !== "null") {
             formData.breeder = Number(formFields.breeder.value)
+        } else {
+            formData.breeder = null
         }
         formData.coat = Number(formFields.coat.value)
         formData.height = Number(formFields.height.value)
         formData.statut = formFields.statut.value
         formData.comment = formFields.comment.value
-
-
-        console.log(formData)
-        if (verifications(formData)) {
-            if(formData.photo !== null){
-                formData.photo = formData.photo.name
+        fetch("http://localhost:3001/api/horse/addHorse", {
+            method: 'POST',
+            body: JSON.stringify(formData),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
             }
-            fetch("http://localhost:3000/api/horse/addHorse", {
-                method: 'POST',
-                body: JSON.stringify(formData),
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8"
-                }
-            }).then(() => {
-                success()
-            })
-        } else {
-            console.log("Error")
+        }).then(response => {
+            return response.json()
+        }).then(res => {
+            if (res === 200) {
+                successDisplay()
+            } else {
+                errorDisplay(res.errormsg)
+            }
+        })
+    }
+
+    const errorDisplay = (errormsg) => {
+        let txt = ""
+        for (let i in errormsg) {
+            txt += errormsg[i] + "\n"
         }
+        document.getElementById("errordisplay").innerText = txt
+        document.getElementById("errordisplay").style.backgroundColor = "rgba(220,101,101,0.68)"
     }
-
-    const success = () => {
+    const successDisplay = () => {
+        document.getElementById("errordisplay").innerText = ""
+        document.getElementById("errordisplay").style.backgroundColor = "#f2f2f2"
         document.getElementById("button").style.display = "none"
-        document.getElementById("success").innerText = "Cheval ajouté avec succès à la base de données"
-        document.getElementById("success").style.backgroundColor = "rgba(149, 203, 148, 0.68)"
-        console.log("success")
+        document.getElementById("successdisplay").innerText = "Cheval ajouté avec succès à la base de données"
+        document.getElementById("successdisplay").style.backgroundColor = "rgba(149, 203, 148, 0.68)"
     }
 
-    if (isLoaded.breed && isLoaded.breeder && isLoaded.coat) {
+    if (isLoaded) {
         return (
-            <form onSubmit={handleSubmit}>
+            <form className={'addHorse'} onSubmit={handleSubmit}>
                 <FormTop/>
                 <div className={"right"}>
                     <div className={"field"}>
@@ -163,7 +103,7 @@ const AddHorse = () => {
                     <div className={"field"}>
                         <label htmlFor="breeder">Eleveur:<br/></label>
                         <select id="breeder" name="breeder">
-                            <option value={null}>Aucun</option>
+                            <option value={"null"} selected="selected">Aucun</option>
                             <OptionsDisplay data={fetchData} opt={"breeder"}/>
                         </select>
                     </div>
@@ -175,17 +115,17 @@ const AddHorse = () => {
                     </div>
                     <FormBot/>
                     <div className={"blockbtn"}>
-                    <p>* Champs Obligatoires</p>
-                    <button id="button" className={"btn"} type="submit">Ajouter</button>
+                        <p>* Champs Obligatoires</p>
+                        <button id="button" className={"btn"} type="submit">Ajouter</button>
                     </div>
-                    <div id="success">
+                    <div id="successdisplay">
                     </div>
                 </div>
             </form>
         );
     } else {
         return (
-            <form onSubmit={handleSubmit}>
+            <form className={'addHorse'} onSubmit={handleSubmit}>
                 <FormTop/>
                 <div className={"right"}>
                     <div className={"field"}>
@@ -211,7 +151,7 @@ const AddHorse = () => {
                         <p>* Champs Obligatoires</p>
                         <button id="button" className={"btn"} type="submit">Ajouter</button>
                     </div>
-                    <div id="success">
+                    <div id="successdisplay">
                     </div>
                 </div>
             </form>
@@ -233,9 +173,9 @@ const FormTop = () => {
             <div className={"field"}>
                 <label>Sexe*:<br></br>
                     <label htmlFor="male">M</label>
-                    <input id="male" name="gender" type="radio" value="Male" required/>
+                    <input id="male" name="gender" type="radio" value="male" required/>
                     <label htmlFor="female">F</label>
-                    <input id="female" name="gender" type="radio" value="Female"/>
+                    <input id="female" name="gender" type="radio" value="female"/>
                 </label>
             </div>
             <div className={"field"}>
@@ -245,6 +185,8 @@ const FormTop = () => {
             <div className={"field"}>
                 <label htmlFor="comment">Besoins médicaux / Commentaire<br/></label>
                 <textarea id="comment" name="comment" rows="4" cols="50"/>
+            </div>
+            <div id="errordisplay">
             </div>
         </div>
     );
@@ -260,10 +202,10 @@ const FormBot = () => {
             <div className={"field"}>
                 <label htmlFor="statut">Statut: *<br/></label>
                 <select id="statut" name="statut" required>
-                    <option value="elev">Élevage</option>
-                    <option value="compet">Competition</option>
+                    <option value="elevage">Élevage</option>
+                    <option value="competition">Competition</option>
                     <option value="manege">Manege</option>
-                    <option value="other">Autre</option>
+                    <option value="autre">Autre</option>
                 </select>
             </div>
         </div>
@@ -271,53 +213,14 @@ const FormBot = () => {
 }
 
 const OptionsDisplay = (props) => {
-    let options = props.data[props.opt].map(coat => coat[props.opt])
-    return options.map(string => parse(string))
-}
-
-function verifications(params) {
-    if (params.photo !== null) { //Verif Photo
-        let parts = params.photo.name.split('.');
-        let fileSize = params.photo.size / 1024 / 1024; // in MiB
-        if (fileSize > 8 || !["png", "jpg"].includes(parts[parts.length - 1])) {
-            document.getElementById("photo").className = "wrong";
-            console.log("Photo is not a png or jpg");
-            return false;
+    let html = ""
+    if (props.data[0] !== undefined) {
+        for (let i in Object.keys(props.data[0])) {
+            if (props.data[0][i].source === props.opt) {
+                html += props.data[0][i].option
+            }
         }
-    } else {
-        document.getElementById("photo").classList.remove("wrong");
     }
-    if (params.hname.length > 100 || params.hname.length < 1) { //Verif name
-        document.getElementById("hname").className = "wrong";
-        console.log("Name is too long or too short");
-        return false;
-    } else {
-        document.getElementById("hname").classList.remove("wrong");
-    }
-    if (new Date(params.birthdate) > new Date()) { //Verif Date
-        document.getElementById("birth").className = "wrong";
-        console.log("Date is in the future");
-        return false;
-    } else {
-        document.getElementById("birth").classList.remove("wrong");
-    }
-    if (params.height > 500 || params.height < 20) { //Verif height
-        document.getElementById("height").className = "wrong";
-        console.log("Height is too big or too small");
-        return false;
-    } else {
-        document.getElementById("height").classList.remove("wrong");
-    }
-    if (params.comment.length > 500000) { //Verif comment
-        document.getElementById("comment").className = "wrong";
-        console.log("Comment is too long");
-        return false;
-    } else {
-        document.getElementById("comment").classList.remove("wrong");
-    }
-    console.log("Vérifications ok")
-    return true;
+    return parse(html)
 }
-
-
 export default AddHorse;
