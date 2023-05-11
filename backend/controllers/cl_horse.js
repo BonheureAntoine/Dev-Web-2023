@@ -20,12 +20,34 @@ exports.options = (req, res) => {
         })
 }
 
+
+
+exports.getHorses = (req, res, next) => {
+    pool.getConnection()
+        .then(conn => {
+            conn.query("CALL getHorses()")
+                .then(rows => {
+                    console.log("Calling HorseList");
+                    res.status(200).json(rows[0]);
+                })
+                .catch(err => {
+                        res.status(400).json({err});
+                    }
+                )
+            conn.release()
+        })
+        .catch(err => {
+            res.status(400).json({err});
+        })
+}
 exports.addHorse = (req, res) => {
 
     function dataVerfication() {
         let errormsg = [];
         if (typeof req.body.photo !== "string" && req.body.photo !== null) { //Verif Photo
             errormsg.push("Le format de la photo est invalide")
+        } else if(req.body.photo.length > 500) {
+            errormsg.push("Photo invalide: Le nom du fichier ne peut pas dépasser 500 caractères")
         }
         if (typeof req.body.birthdate !== "string" || isNaN(new Date(req.body.birthdate).getTime())) { //Verif Date
             errormsg.push("Le format de la date est invalide")
