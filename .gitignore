@@ -2,3 +2,5 @@ backend/node_modules
 backend/.env-local
 .idea
 frontend/node_modules
+backend/tests
+frontend/tests
