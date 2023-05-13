@@ -1,35 +1,21 @@
-const cl_evenement = require("../controllers/cl_abonnement")
-const r_evenement = require("../routes/r_evenement")
 
-const fileapp = require("../app")
-const request = require("supertest");
-
-const app = require('../app')
+const request = require('supertest');
+const app = require('../app');
 
 
-
-
-
-describe("evenements", () => {
-    it('test', () => {
-        const rep = r_evenement.get('/')
-        expect(rep.status).toBe(200)
-
-
+// Je fais des test sur la reponse de ce que je recois de ma demande get
+describe('Test the evenements API', () => {
+    test('It should respond with 200 status code', async () => {
+        const response = await request(app).get('/api/evenements');
+        //console.log(response)
+        expect(response.statusCode).toBe(200);
+        expect(response.status).toBe(200);
+        expect(response.body).toBeInstanceOf(Array);
+        expect(response.req.method).toBe('GET');
     });
-})
-
-
-/*
-describe("Calculator tests", () => {
-    test('adding 1 + 2 should return 3', () => {
-        // arrange and act
-        var result = mathOperations.sum(1,2)
-
-        // assert
-        expect(result).toBe(3);
+    test('It should use GET method', async () => {
+        const response = await request(app).post('/api/evenements');
+        expect(response.statusCode).toBe(404); // Method Not Allowed
     });
-})
+});
 
-
- */
