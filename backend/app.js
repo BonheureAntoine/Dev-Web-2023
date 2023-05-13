@@ -3,7 +3,7 @@ const mariadb = require('mariadb');
 const horseRoutes = require('./routes/r_horse');
 const paymentsRoutes = require('./routes/r_payment');
 const abonnementRoutes = require('./routes/r_abonnement');
-const evenements = require('./routes/r_evenements')
+const evenements = require('./routes/r_evenement')
 const pool = require('./db');
 require('dotenv').config({path :'.env-local'});
 
