@@ -64,7 +64,7 @@ class Calendrier extends React.Component{
   }
   
   componentDidMount() {
-    fetch("https://equimanagmentapi.vercel.app/api/evenements")
+    fetch("http://localhost:3001/api/evenements")
         .then(response => {
             if (response.ok) {
                 return response.json();
@@ -80,7 +80,7 @@ class Calendrier extends React.Component{
 
 
     render(){
-        return <div>
+        return <div className="calendrier">
         <Calendar
           localizer={localizer}
           defaultDate={this.state.date}

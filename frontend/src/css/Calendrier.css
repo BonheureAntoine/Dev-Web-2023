@@ -1,6 +1,10 @@
+.calendrier{
+    width: 100%;
+    
+}
+
 .rbc-calendar{
-    min-height: 1000px ;
-    width: 300%;
+    width: 100%;
     padding: 20px
 }
 .rbc-time-content{
