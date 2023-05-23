@@ -18,7 +18,7 @@ const AddHorse = () => {
         comment: "",
     });
     const fetchOptions = () => {
-        fetch("https://equimanagmentapi.vercel.app/api/horse/options")
+        fetch("http://localhost:3001/api/horse/options")
             .then(response => {
                 if (response.ok) {
                     return response.json()
@@ -56,7 +56,7 @@ const AddHorse = () => {
         formData.height = Number(formFields.height.value)
         formData.statut = formFields.statut.value
         formData.comment = formFields.comment.value
-        fetch("https://equimanagmentapi.vercel.app/api/horse/addHorse", {
+        fetch("http://localhost:3001/api/horse/addHorse", {
             method: 'POST',
             body: JSON.stringify(formData),
             headers: {
@@ -65,7 +65,7 @@ const AddHorse = () => {
         }).then(response => {
             return response.json()
         }).then(res => {
-            if (res === 200) {
+            if (res === 201) {
                 successDisplay()
             } else {
                 errorDisplay(res.errormsg)
@@ -163,7 +163,7 @@ const FormTop = () => {
     return (
         <div className={"left"}>
             <div className={"field"}>
-                <label htmlFor="photo">Photo: (png ou jpg)<br/></label>
+                <label htmlFor="photo">Photo:<br/></label>
                 <input id="photo" name="photo" type="file"/>
             </div>
             <div className={"field"}>
