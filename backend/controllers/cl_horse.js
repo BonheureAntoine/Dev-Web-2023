@@ -43,7 +43,6 @@ exports.getHorses = (req, res, next) => {
 exports.addHorse = (req, res) => {
 
     function dataVerification() {
-        console.log("dataVerification");
         let errors = [];
 
         if (typeof req.body.photo !== "string" && req.body.photo !== null) {
@@ -97,7 +96,6 @@ exports.addHorse = (req, res) => {
         if (typeof req.body.gender !== "string" || !["male", "female"].includes(req.body.gender)) {
             errors.push({ field: "gender", message: "La valeur/format du sexe est invalide" });
         }
-        console.log(errors)
         if (errors.length === 0) {
             return true
         } else {
@@ -112,7 +110,7 @@ exports.addHorse = (req, res) => {
                 conn.query(`CALL newHorse(?,?,?,?,?,?,?,?,?,?);`, [req.body.hname, req.body.photo, req.body.gender, req.body.birthdate, req.body.breed, req.body.height, req.body.statut, req.body.comment, req.body.breeder, req.body.coat])
                     .then(() => {
                         console.log("Calling  newHorse");
-                        res.status(201).json(200);
+                        res.status(201).json(201);
                     })
                     .catch(err => {
                             console.log(err);

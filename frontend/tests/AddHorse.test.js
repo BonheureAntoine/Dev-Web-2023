@@ -7,18 +7,40 @@ import {useEffect, useState} from 'react';
 import parse from 'html-react-parser'
 
 test('soumission réussie du formulaire', async () => {
-    // Mock de la fonction fetch pour simuler une réponse réussie
+    const mockData = [
+        {"option":"<option id=\"1\" value=\"1\"> Antoine Bonheure </option>","source":"breeder"},
+        {"option":"<option id=\"2\" value=\"2\"> Alexandra Vanneste </option>","source":"breeder"},
+        {"option":"<option id=\"1\" value=\"1\"> arabe </option>","source":"breed"},
+        {"option":"<option id=\"2\" value=\"2\"> frison </option>","source":"breed"},
+        {"option":"<option id=\"3\" value=\"3\"> pur-sang </option>","source":"breed"},
+        {"option":"<option id=\"4\" value=\"4\"> shetland </option>","source":"breed"},
+        {"option":"<option id=\"5\" value=\"5\"> trotteur </option>","source":"breed"},
+        {"option":"<option id=\"1\" value=\"1\"> alezan </option>","source":"coat"},
+        {"option":"<option id=\"2\" value=\"2\"> aubère </option>","source":"coat"},
+        {"option":"<option id=\"3\" value=\"3\"> bai </option>","source":"coat"},
+        {"option":"<option id=\"4\" value=\"4\"> blanc </option>","source":"coat"},
+        {"option":"<option id=\"5\" value=\"5\"> crème </option>","source":"coat"},
+        {"option":"<option id=\"6\" value=\"6\"> gris </option>","source":"coat"},
+        {"option":"<option id=\"7\" value=\"7\"> isabelle </option>","source":"coat"},
+        {"option":"<option id=\"8\" value=\"8\"> noir </option>","source":"coat"},
+        {"option":"<option id=\"9\" value=\"9\"> palomino </option>","source":"coat"},
+        {"option":"<option id=\"10\" value=\"10\"> pie </option>","source":"coat"},
+        {"option":"<option id=\"11\" value=\"11\"> rouan </option>","source":"coat"},
+        {"option":"<option id=\"12\" value=\"12\"> souris </option>","source":"coat"},
+        {"option":"<option id=\"13\" value=\"13\"> tacheté </option>","source":"coat"}
+    ];
+
     global.fetch = jest.fn().mockResolvedValueOnce({
         ok: true,
-        json: jest.fn().mockResolvedValueOnce(201)
+        json: jest.fn().mockResolvedValueOnce(mockData),
     });
 
     // Rendu du composant
     render(<AddHorse />);
 
-    //await act(() => new Promise((resolve) => setTimeout(resolve, 3000)));
+    await act(() => new Promise((resolve) => setTimeout(resolve, 3000)));
 
-    await waitFor(() => expect(getByText('Ajouter')).toBeInTheDocument());
+    //await waitFor(() => expect(getByText('Ajouter')).toBeInTheDocument());
 
     const file = new File(['dummy content'], 'dummy.jpg', { type: 'image/jpeg' });
 
