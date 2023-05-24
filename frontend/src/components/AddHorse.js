@@ -18,7 +18,7 @@ const AddHorse = () => {
         comment: "",
     });
     const fetchOptions = () => {
-        fetch("https://equimanagmentapi.vercel.app/api/horse/options")
+        fetch("http://localhost:3001/api/horse/options")
             .then(response => {
                 if (response.ok) {
                     return response.json()
@@ -56,7 +56,7 @@ const AddHorse = () => {
         formData.height = Number(formFields.height.value)
         formData.statut = formFields.statut.value
         formData.comment = formFields.comment.value
-        fetch("https://equimanagmentapi.vercel.app/api/horse/addHorse", {
+        fetch("http://localhost:3001/api/horse/addHorse", {
             method: 'POST',
             body: JSON.stringify(formData),
             headers: {
@@ -65,18 +65,18 @@ const AddHorse = () => {
         }).then(response => {
             return response.json()
         }).then(res => {
-            if (res === 200) {
+            if (res === 201) {
                 successDisplay()
             } else {
-                errorDisplay(res.errormsg)
+                errorDisplay(res.errors)
             }
         })
     }
 
-    const errorDisplay = (errormsg) => {
+    const errorDisplay = (errors) => {
         let txt = ""
-        for (let i in errormsg) {
-            txt += errormsg[i] + "\n"
+        for (let i in errors) {
+            txt += errors[i].message + "\n"
         }
         document.getElementById("errordisplay").innerText = txt
         document.getElementById("errordisplay").style.backgroundColor = "rgba(220,101,101,0.68)"
@@ -149,7 +149,6 @@ const AddHorse = () => {
                     <FormBot/>
                     <div className={"blockbtn"}>
                         <p>* Champs Obligatoires</p>
-                        <button id="button" className={"btn"} type="submit">Ajouter</button>
                     </div>
                     <div id="successdisplay">
                     </div>
@@ -163,7 +162,7 @@ const FormTop = () => {
     return (
         <div className={"left"}>
             <div className={"field"}>
-                <label htmlFor="photo">Photo: (png ou jpg)<br/></label>
+                <label htmlFor="photo">Photo:<br/></label>
                 <input id="photo" name="photo" type="file"/>
             </div>
             <div className={"field"}>
