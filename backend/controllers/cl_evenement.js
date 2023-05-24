@@ -1,6 +1,6 @@
 const pool = require('../db');
 
-exports.evenements = (req, res, next) => {
+exports.evenement = (req, res, next) => {
     pool.getConnection()
         .then(conn => {
             conn.query("CALL allEvent()")
