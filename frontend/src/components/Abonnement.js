@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import '../css/Abonnement.css';
 import {useAuth0} from "@auth0/auth0-react";
 
-const displayedUser=1;
+const displayedUser=2;
 
 const Abonnement = () => {
     const { getAccessTokenSilently } = useAuth0();
@@ -13,29 +13,43 @@ const Abonnement = () => {
     const [logs, setLogs] = useState([])
     const [logsIsLoaded, setLogsIsLoaded] = useState(false)
 
-    const fetchRiderData = () =>{
-            var accessToken;
-            console.log('here')
-            getAccessTokenSilently({
-                authorizationParams: {
-                    audience: 'https://equimanagement/api/abonnement',
-                    scope: 'read:abonnement'
-                }
-            }).then(response=>{accessToken = response});
-
-            fetch(`http://localhost:3001/api/abonnement/user/${displayedUser}`, {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`
-                }
-            })
-                .then(response => {
-                    return response.json()
-                })
-                .then(data => {
-                    setRider(data[0])
-                    setRiderIsLoaded(true)
-                })
-        };
+    const fetchRiderData = async () => {
+        const accessToken = await getAccessTokenSilently({
+                    authorizationParams: {
+                        audience: 'https://equimanagement/api/abonnement',
+                        scope: 'read:abonnement',
+                        redirect_uri: 'http://localhost:3000'
+                    }})
+        console.log(accessToken)
+    }
+        //     var accessToken;
+        //     getAccessTokenSilently({
+        //         authorizationParams: {
+        //             audience: 'https://equimanagement/api/abonnement',
+        //             scope: 'read:abonnement',
+        //             redirect_uri: 'http://localhost:3000'
+        //         }
+        //     }).catch((error)=>{
+        //         console.log(error)
+        //     })
+        //         .then(response=>{
+        //         accessToken = response;
+        //         console.log(accessToken)
+        //     }).then(()=>{
+        //         fetch(`http://localhost:3001/api/abonnement/user/${displayedUser}`, {
+        //             headers: {
+        //                 Authorization: `Bearer ${accessToken}`
+        //             }
+        //         })
+        //             .then(response => {
+        //                 return response.json()
+        //             })
+        //             .then(data => {
+        //                 setRider(data[0])
+        //                 setRiderIsLoaded(true)
+        //             })
+        //     })
+        // };
 
     const fetchLogsData = () => {
         fetch(`http://localhost:3001/api/abonnement/logs/${displayedUser}`)
