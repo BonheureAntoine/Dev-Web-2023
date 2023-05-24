@@ -68,8 +68,8 @@ exports.addHorse = (req, res) => {
 
         if (!Number.isInteger(req.body.height)) {
             errors.push({ field: "height", message: "Le format de la taille est invalide" });
-        } else if (req.body.height > 300 || req.body.height <= 0) {
-            errors.push({ field: "height", message: "Taille invalide: La taille du cheval ne peut pas dépasser 300 cm ou être plus petit ou égal à 0" });
+        } else if (req.body.height > 300 || req.body.height < 0) {
+            errors.push({ field: "height", message: "Taille invalide: La taille du cheval ne peut pas dépasser 300 cm ou être négative" });
         }
 
         if (typeof req.body.comment !== "string") {

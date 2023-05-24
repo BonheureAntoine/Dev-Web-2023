@@ -317,7 +317,7 @@ test('Test de l\'ajout d\'un cheval - Taille invalide > 300cm', async () => {
         expect(error.response.data.errors).toEqual([
             {
                 field: 'height',
-                message: "Taille invalide: La taille du cheval ne peut pas dépasser 300 cm ou être plus petit ou égal à 0",
+                message: "Taille invalide: La taille du cheval ne peut pas dépasser 300 cm ou être négative",
             },
         ]);
     }
@@ -346,7 +346,7 @@ test('Test de l\'ajout d\'un cheval - Taille invalide > 300cm', async () => {
         expect(error.response.data.errors).toEqual([
             {
                 field: 'height',
-                message: "Taille invalide: La taille du cheval ne peut pas dépasser 300 cm ou être plus petit ou égal à 0",
+                message: "Taille invalide: La taille du cheval ne peut pas dépasser 300 cm ou être négative",
             },
         ]);
     }

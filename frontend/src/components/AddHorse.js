@@ -68,15 +68,15 @@ const AddHorse = () => {
             if (res === 201) {
                 successDisplay()
             } else {
-                errorDisplay(res.errormsg)
+                errorDisplay(res.errors)
             }
         })
     }
 
-    const errorDisplay = (errormsg) => {
+    const errorDisplay = (errors) => {
         let txt = ""
-        for (let i in errormsg) {
-            txt += errormsg[i] + "\n"
+        for (let i in errors) {
+            txt += errors[i].message + "\n"
         }
         document.getElementById("errordisplay").innerText = txt
         document.getElementById("errordisplay").style.backgroundColor = "rgba(220,101,101,0.68)"
@@ -149,7 +149,6 @@ const AddHorse = () => {
                     <FormBot/>
                     <div className={"blockbtn"}>
                         <p>* Champs Obligatoires</p>
-                        <button id="button" className={"btn"} type="submit">Ajouter</button>
                     </div>
                     <div id="successdisplay">
                     </div>
