@@ -20,7 +20,6 @@ const Nav = () => {
                     <li className="nav"><Link to='/' className="acceuil">Acceuil</Link></li>
                     <li className="nav"><Link to='/calendrier' className="calendrier">Calendrier</Link></li>
                     <li className="nav"><Link to='/chevaux' className="chevaux">Chevaux</Link></li>
-                    <li className="nav"><Link to='/addhorse' className="chevaux">Chevaux</Link></li>
                     <AuthorizeUser userRole={'equiadmin'} component={<li className="nav"><Link to='/addhorse' className="chevaux"> Ajout de chevaux</Link></li>}/>
                     <AuthorizeUser userRole={'equiadmin'} component={<li className="nav"><Link to='/abonnement' className="abonnement">Abonnement</Link></li>}/>
 
