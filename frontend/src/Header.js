@@ -23,7 +23,7 @@ const Header = () => {
 
     return(
             <div id ='App-header'>
-                <a href='http://localhost:3000/'><img src={logo} alt='logo' className="logo"></img></a>
+                <a href='https://equimanagement.vercel.app/'><img src={logo} alt='logo' className="logo"></img></a>
                 <div className="nameEnterprise" >EquiManagement</div>
                 {!isAuthenticated && (<LoginButton/>)}
                 {isAuthenticated && (<LogoutButton/>)}

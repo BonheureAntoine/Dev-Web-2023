@@ -3,7 +3,7 @@ const pool = require('../db');
 exports.evenements = (req, res, next) => {
     pool.getConnection()
         .then(conn => {
-            conn.query("CALL allEvent()")
+            conn.query("CALL getallEvent()")
                 .then(rows => {
                     res.status(200).json(rows[0]);
                 })
