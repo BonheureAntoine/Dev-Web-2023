@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const evenementCtrl = require('../controllers/cl_evenements');
+const concoursCtrl = require('../controllers/cl_acceuil');
 const pool = require("../db");
 
-router.get('/', evenementCtrl.evenements);
+router.get('/', concoursCtrl.concours);
 
 module.exports = router;

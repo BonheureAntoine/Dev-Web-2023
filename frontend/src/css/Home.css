@@ -1,0 +1,49 @@
+.acceuil{
+    display: flex;
+    flex-direction: row;
+    border: black solid 2px;
+    width: 100%;
+    margin: 2%;
+}
+.acceuil-contenu{
+    display: flex;
+    flex-direction: column;
+    /* border: yellow solid 2px; */
+    width: 70%;
+}
+.acceuil-text{
+    text-align: center;
+}
+.acceuil-listes{
+    display: flex;
+    flex-direction: column;
+    /* border: red solid 2px; */
+    width: 30%;
+}
+.acceuil-concours, .acceuil-actualite{
+    /* border: green solid 5px; */
+    max-height: 40%;
+    margin: 5PX;
+    overflow-y: auto;
+}
+.acceuil-text{
+    margin: 2%;
+}
+p{
+    margin: 0;
+}
+.acceuil-contenu-images{
+    display:inline;
+    margin: 2%;
+    text-align: center;
+}
+.acceuil-images{
+    display:flex;
+    justify-content: center;
+}
+.acceuil-image-first{
+    width: 66%;
+}
+.acceuil-image{
+    width: 22%;
+}

@@ -3,7 +3,8 @@ const mariadb = require('mariadb');
 const horseRoutes = require('./routes/r_horse');
 const paymentsRoutes = require('./routes/r_payment');
 const abonnementRoutes = require('./routes/r_abonnement');
-const evenements = require('./routes/r_evenements')
+const evenement = require('./routes/r_evenement')
+const concours = require('./routes/r_acceuil')
 const pool = require('./db');
 require('dotenv').config({path :'.env-local'});
 
@@ -34,6 +35,7 @@ app.use("/api/horse", horseRoutes);
 // app.use(express.urlencoded({extended:true}));
 app.use('/api/abonnement', abonnementRoutes);
 
-app.use('/api/evenements', evenements)
+app.use('/api/evenement', evenement);
+app.use('/api/concours', concours);
 module.exports = app;
 
