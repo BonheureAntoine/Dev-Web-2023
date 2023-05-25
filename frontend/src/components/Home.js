@@ -29,7 +29,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:3001/api/concours")
+    fetch("https://equimanagmentapi.vercel.app/api/concours")
         .then(response => {
             if (response.ok) {
                 return response.json();
