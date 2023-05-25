@@ -52,7 +52,7 @@ test('Test de l\'ajout d\'un cheval valide', async () => {
     };
 
     // Effectuez la requête POST à l'endpoint de votre API pour ajouter un utilisateur
-    const response = await axios.post('/addHorse', data);
+    const response = await axios.post('/', data);
 
     // Vérifiez si la réponse contient les données attendues
     expect(response.status).toBe(201); // Statut 201 pour la création réussie
@@ -72,10 +72,10 @@ test('Test de l\'ajout d\'un cheval - Photo invalide (format)', async () => {
         comment: "Lorem ipsum dolor sit amet.",
     };
 
-    await expect(axios.post('/addHorse', data)).rejects.toThrow();
+    await expect(axios.post('/', data)).rejects.toThrow();
 
     try {
-        await axios.post('/addHorse', data);
+        await axios.post('/', data);
     } catch (error) {
         expect(error.response.status).toBe(422);
         expect(error.response.data.errors).toEqual([
@@ -101,10 +101,10 @@ test('Test de l\'ajout d\'un cheval - Photo invalide (taille)', async () => {
         comment: "Lorem ipsum dolor sit amet.",
     };
 
-    await expect(axios.post('/addHorse', data)).rejects.toThrow();
+    await expect(axios.post('/', data)).rejects.toThrow();
 
     try {
-        await axios.post('/addHorse', data);
+        await axios.post('/', data);
     } catch (error) {
         expect(error.response.status).toBe(422);
         expect(error.response.data.errors).toEqual([
@@ -131,10 +131,10 @@ test('Test de l\'ajout d\'un cheval - Date de naissance invalide (structure date
         comment: "Lorem ipsum dolor sit amet.",
     };
 
-    await expect(axios.post('/addHorse', data)).rejects.toThrow();
+    await expect(axios.post('/', data)).rejects.toThrow();
 
     try {
-        await axios.post('/addHorse', data);
+        await axios.post('/', data);
     } catch (error) {
         expect(error.response.status).toBe(422);
         expect(error.response.data.errors).toEqual([
@@ -160,10 +160,10 @@ test('Test de l\'ajout d\'un cheval - Date de naissance invalide (futur)', async
         comment: "Lorem ipsum dolor sit amet.",
     };
 
-    await expect(axios.post('/addHorse', data)).rejects.toThrow();
+    await expect(axios.post('/', data)).rejects.toThrow();
 
     try {
-        await axios.post('/addHorse', data);
+        await axios.post('/', data);
     } catch (error) {
         expect(error.response.status).toBe(422);
         expect(error.response.data.errors).toEqual([
@@ -189,10 +189,10 @@ test('Test de l\'ajout d\'un cheval - Date de naissance invalide (format invalid
         comment: "Lorem ipsum dolor sit amet.",
     };
 
-    await expect(axios.post('/addHorse', data)).rejects.toThrow();
+    await expect(axios.post('/', data)).rejects.toThrow();
 
     try {
-        await axios.post('/addHorse', data);
+        await axios.post('/', data);
     } catch (error) {
         expect(error.response.status).toBe(422);
         expect(error.response.data.errors).toEqual([
@@ -219,10 +219,10 @@ test('Test de l\'ajout d\'un cheval - Nom invalide (<1)', async () => {
         comment: "Lorem ipsum dolor sit amet.",
     };
 
-    await expect(axios.post('/addHorse', data)).rejects.toThrow();
+    await expect(axios.post('/', data)).rejects.toThrow();
 
     try {
-        await axios.post('/addHorse', data);
+        await axios.post('/', data);
     } catch (error) {
         expect(error.response.status).toBe(422);
         expect(error.response.data.errors).toEqual([
@@ -248,10 +248,10 @@ test('Test de l\'ajout d\'un cheval - Nom invalide (format invalide)', async () 
         comment: "Lorem ipsum dolor sit amet.",
     };
 
-    await expect(axios.post('/addHorse', data)).rejects.toThrow();
+    await expect(axios.post('/', data)).rejects.toThrow();
 
     try {
-        await axios.post('/addHorse', data);
+        await axios.post('/', data);
     } catch (error) {
         expect(error.response.status).toBe(422);
         expect(error.response.data.errors).toEqual([
@@ -279,10 +279,10 @@ test('Test de l\'ajout d\'un cheval - Taille invalide (format invalide)', async 
         comment: "Lorem ipsum dolor sit amet.",
     };
 
-    await expect(axios.post('/addHorse', data)).rejects.toThrow();
+    await expect(axios.post('/', data)).rejects.toThrow();
 
     try {
-        await axios.post('/addHorse', data);
+        await axios.post('/', data);
     } catch (error) {
         expect(error.response.status).toBe(422);
         expect(error.response.data.errors).toEqual([
@@ -308,10 +308,10 @@ test('Test de l\'ajout d\'un cheval - Taille invalide > 300cm', async () => {
         comment: "Lorem ipsum dolor sit amet.",
     };
 
-    await expect(axios.post('/addHorse', data)).rejects.toThrow();
+    await expect(axios.post('/', data)).rejects.toThrow();
 
     try {
-        await axios.post('/addHorse', data);
+        await axios.post('/', data);
     } catch (error) {
         expect(error.response.status).toBe(422);
         expect(error.response.data.errors).toEqual([
@@ -337,10 +337,10 @@ test('Test de l\'ajout d\'un cheval - Taille invalide > 300cm', async () => {
         comment: "Lorem ipsum dolor sit amet.",
     };
 
-    await expect(axios.post('/addHorse', data)).rejects.toThrow();
+    await expect(axios.post('/', data)).rejects.toThrow();
 
     try {
-        await axios.post('/addHorse', data);
+        await axios.post('/', data);
     } catch (error) {
         expect(error.response.status).toBe(422);
         expect(error.response.data.errors).toEqual([
@@ -366,10 +366,10 @@ test('Test de l\'ajout d\'un cheval - Commentaire invalide (format invalide)', a
         comment: 12345, // Commentaire invalide
     };
 
-    await expect(axios.post('/addHorse', data)).rejects.toThrow();
+    await expect(axios.post('/', data)).rejects.toThrow();
 
     try {
-        await axios.post('/addHorse', data);
+        await axios.post('/', data);
     } catch (error) {
         expect(error.response.status).toBe(422);
         expect(error.response.data.errors).toEqual([
@@ -396,10 +396,10 @@ test('Test de l\'ajout d\'un cheval - Race invalide', async () => {
         comment: "Lorem ipsum dolor sit amet.",
     };
 
-    await expect(axios.post('/addHorse', data)).rejects.toThrow();
+    await expect(axios.post('/', data)).rejects.toThrow();
 
     try {
-        await axios.post('/addHorse', data);
+        await axios.post('/', data);
     } catch (error) {
         expect(error.response.status).toBe(422);
         expect(error.response.data.errors).toEqual([
@@ -426,10 +426,10 @@ test('Test de l\'ajout d\'un cheval - Coat invalide', async () => {
         comment: "Lorem ipsum dolor sit amet.",
     };
 
-    await expect(axios.post('/addHorse', data)).rejects.toThrow();
+    await expect(axios.post('/', data)).rejects.toThrow();
 
     try {
-        await axios.post('/addHorse', data);
+        await axios.post('/', data);
     } catch (error) {
         expect(error.response.status).toBe(422);
         expect(error.response.data.errors).toEqual([
@@ -456,10 +456,10 @@ test('Test de l\'ajout d\'un cheval - Éleveur invalide', async () => {
         comment: "Lorem ipsum dolor sit amet.",
     };
 
-    await expect(axios.post('/addHorse', data)).rejects.toThrow();
+    await expect(axios.post('/', data)).rejects.toThrow();
 
     try {
-        await axios.post('/addHorse', data);
+        await axios.post('/', data);
     } catch (error) {
         expect(error.response.status).toBe(422);
         expect(error.response.data.errors).toEqual([
@@ -486,10 +486,10 @@ test('Test de l\'ajout d\'un cheval - Format de statut invalide', async () => {
         comment: "Lorem ipsum dolor sit amet.",
     };
 
-    await expect(axios.post('/addHorse', data)).rejects.toThrow();
+    await expect(axios.post('/', data)).rejects.toThrow();
 
     try {
-        await axios.post('/addHorse', data);
+        await axios.post('/', data);
     } catch (error) {
         expect(error.response.status).toBe(422);
         expect(error.response.data.errors).toEqual([
@@ -516,10 +516,10 @@ test('Test de l\'ajout d\'un cheval - Format de sexe invalide', async () => {
         comment: "Lorem ipsum dolor sit amet.",
     };
 
-    await expect(axios.post('/addHorse', data)).rejects.toThrow();
+    await expect(axios.post('/', data)).rejects.toThrow();
 
     try {
-        await axios.post('/addHorse', data);
+        await axios.post('/', data);
     } catch (error) {
         expect(error.response.status).toBe(422);
         expect(error.response.data.errors).toEqual([

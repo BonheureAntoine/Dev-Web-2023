@@ -45,7 +45,7 @@ class HorseList extends Component {
     }
 
     componentDidMount() {
-        fetch("https://equimanagmentapi.vercel.app/api/horse/getHorses")
+        fetch("https://equimanagmentapi.vercel.app/api/horse/")
             .then(response => {
                 if (response.ok) {
                     return response.json();

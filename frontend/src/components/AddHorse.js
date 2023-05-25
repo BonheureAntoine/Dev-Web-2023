@@ -56,7 +56,7 @@ const AddHorse = () => {
         formData.height = Number(formFields.height.value)
         formData.statut = formFields.statut.value
         formData.comment = formFields.comment.value
-        fetch("https://equimanagmentapi.vercel.app/api/horse/addHorse", {
+        fetch("https://equimanagmentapi.vercel.app/api/horse/", {
             method: 'POST',
             body: JSON.stringify(formData),
             headers: {
