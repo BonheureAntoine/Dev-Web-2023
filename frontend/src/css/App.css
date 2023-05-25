@@ -1,15 +1,17 @@
+
 body{
     margin: 0;
+    /* border: #b21212 5px solid; */
 }
 #App{
-    min-width: 1100px;
-    min-height: 800px;
+    /* border: #cc6d6d 5px solid; */
 }
 
 #nav-bar{
     display: flex;
     flex-direction: row;
-    height: 100%;
+    min-height: 800px;
+    min-width: 1000PX;
 }
 #ul-nav{
     background-color: rgb(129, 136, 136);
@@ -26,7 +28,7 @@ body{
     height: 5%;
     width: 100%;
 }
-a.chevaux, a.acceuil, a.calendrier, a.abonnement{
+a.chevaux-nav, a.acceuil-nav, a.calendrier-nav, a.abonnement-nav{
     color: #000000;
     text-align: center;
     text-decoration: none;
