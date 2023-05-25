@@ -28,8 +28,8 @@ const Nav = () => {
                     <Route exact path="/" element={<Home />} />
                     <Route path="/calendrier" element={<Calendrier/>} />
                     <Route path="/chevaux" element={<Chevaux />} />
-                    <Route path="/addhorse" element={<AddHorse />} />
-                    <Route path="/abonnement" element={<Abonnement/>}/>
+                    <Route path="/addhorse" element={<AuthenticationGuard component={AddHorse}/>} />
+                    <Route path="/abonnement" element={<AuthenticationGuard component={Abonnement}/>}/>
                     <Route path={"/notAuthorized"} element={<Error403/>}/>
 
                 </Routes>
