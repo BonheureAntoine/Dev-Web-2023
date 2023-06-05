@@ -1,6 +1,7 @@
+import horseHeadImage from '../img/horse_head.png';
 import React, {Component} from 'react';
 import '../css/Chevaux.css'
-import picture from '../img/horse_head.png'
+
 
 class Chevaux extends Component {
     render() {
@@ -12,29 +13,24 @@ class Chevaux extends Component {
 
 function Horse(horse) {
     return (
-        <a href={horse.link} className="horsePreview">
+        <div className="horsePreview">
             <div className="pic">
-                <img src={picture} alt={picture}
-                     /*onError={event => {
-                         event.target.src = {picture}
-                         event.onerror = null
-                     }}*/
-                     className="horsePic"></img>
+                <img
+                    src={horse.picture || horseHeadImage}
+                    className="horsePic"
+                    alt="Horse Picture"
+                />
             </div>
             <div className="infos">
-                <div className="name">
-                    {horse.name}
-                </div>
-                <div className="status">
-                    {horse.status}
-                </div>
-                <div className="gender">
-                    {horse._gender}
-                </div>
+                <div className="name">{horse.name}</div>
+                <div className="status">{horse.status}</div>
+                <div className="gender">{horse._gender}</div>
             </div>
-        </a>
+        </div>
     )
 }
+
+
 
 class HorseList extends Component {
     constructor() {

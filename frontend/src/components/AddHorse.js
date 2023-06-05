@@ -37,11 +37,23 @@ const AddHorse = () => {
         fetchOptions()
     }, [])
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault()
         const formFields = event.target.elements;
         if (formFields.photo.files[0] !== undefined) {
-            formData.photo = formFields.photo.files[0].name
+            event.preventDefault()
+            const file = formFields.photo.files[0]
+            // get secure url from our server
+            const {url} = await fetch("https://equimanagmentapi.vercel.app/api/horse/s3Url").then(res => res.json())
+            // post the image direclty to the s3 bucket
+            await fetch(url, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                },
+                body: file
+            })
+            formData.photo = url.split('?')[0]
         }
         formData.hname = formFields.hname.value
         formData.gender = formFields.gender.value
